@@ -122,7 +122,7 @@
                 </div>
             </div>
 
-            <!-- Desktop Nav (Includes Admin Panel Restored) -->
+            <!-- Desktop Nav -->
             <nav class="hidden lg:flex items-center gap-1.5">
                 <button onclick="switchTab('overview')" id="nav-overview" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-cyan-400 bg-cyan-950/70 border border-cyan-500/60 shadow-[0_0_10px_rgba(6,182,212,0.3)]">Overview</button>
                 <button onclick="switchTab('register')" id="nav-register" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:text-white hover:bg-cyan-950/40">Register Squad</button>
@@ -158,11 +158,7 @@
         
         <!-- 1. OVERVIEW TAB -->
         <div id="tab-overview" class="tab-content max-w-7xl mx-auto px-4 py-8 space-y-8">
-            
-            <!-- Hero Layout: Grid 2 Columns -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                
-                <!-- LEFT COLUMN: Poster Card with Breathing RGB Neon Lighting -->
                 <div class="lg:col-span-5 flex flex-col justify-center">
                     <div class="relative rounded-3xl p-2 bg-[#0B1021] border-2 rgb-breathing-box">
                         <span class="absolute top-5 right-5 z-10 px-3 py-1 bg-red-600 text-white font-black text-[10px] rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(220,38,38,0.8)]">OFFICIAL POSTER</span>
@@ -172,9 +168,7 @@
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN: Headline, Information Card, Countdown, Glowing Buttons -->
                 <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
-                    
                     <div>
                         <span class="inline-block px-3.5 py-1 rounded-full text-xs font-extrabold bg-yellow-500/10 text-yellow-400 border border-yellow-500/40 uppercase tracking-widest mb-3 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                             GAME ON SCHOOL HEROES!
@@ -184,7 +178,6 @@
                         <p class="text-xs text-red-400 font-extrabold uppercase tracking-wide">Pendaftaran Terakhir: 10 / 11 / 2026</p>
                     </div>
 
-                    <!-- Information Card (Tarikh & Lokasi) -->
                     <div class="rgb-breathing-box bg-[#0B1021]/90 rounded-2xl p-6 grid grid-cols-2 gap-4 text-center border-2">
                         <div class="border-r border-cyan-900/60 pr-2">
                             <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest block mb-1">TARIKH PERTANDINGAN</span>
@@ -198,7 +191,6 @@
                         </div>
                     </div>
 
-                    <!-- Countdown Box with RGB Border Accent -->
                     <div class="rgb-breathing-box bg-[#0B1021]/90 rounded-2xl p-5 text-center border-2">
                         <h3 class="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-3">COUNTDOWN PERTANDINGAN</h3>
                         <div class="grid grid-cols-4 gap-2">
@@ -209,7 +201,6 @@
                         </div>
                     </div>
 
-                    <!-- Double CTA Buttons -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <button onclick="switchTab('register')" class="btn-neon-gold text-black font-black py-4 px-6 rounded-2xl text-sm uppercase tracking-wider text-center">
                             DAFTAR SQUAD NOW
@@ -218,12 +209,9 @@
                             LIHAT SKUAD
                         </button>
                     </div>
-
                 </div>
-
             </div>
 
-            <!-- Bottom Sub-Features Row -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
                 <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 p-4 rounded-2xl text-center">
                     <span class="text-xs font-black text-cyan-400 uppercase tracking-wider block">COMPETE FOR GLORY</span>
@@ -238,7 +226,6 @@
                     <span class="text-xs font-black text-emerald-400 uppercase tracking-wider block">ATTRACTIVE PRIZES</span>
                 </div>
             </div>
-
         </div>
 
         <!-- 2. REGISTER TAB -->
@@ -278,7 +265,7 @@
                     <div id="roster-inputs-container" class="space-y-3"></div>
                 </div>
 
-                <button type="submit" class="btn-neon-gold w-full py-3.5 text-black font-extrabold rounded-xl text-sm uppercase tracking-wider">
+                <button type="submit" id="btn-submit-form" class="btn-neon-gold w-full py-3.5 text-black font-extrabold rounded-xl text-sm uppercase tracking-wider">
                     Hantar Pendaftaran Skuad
                 </button>
             </form>
@@ -316,7 +303,6 @@
                 <p class="text-gray-400 text-sm max-w-2xl mx-auto">Standard competitive Mobile Legends: Bang Bang guidelines enforced at Sekolah Rendah Kebangsaan Taman Gembira on 14/11/2026.</p>
             </div>
 
-            <!-- Sub Navigation Tabs -->
             <div class="flex justify-center mb-8">
                 <div class="bg-[#0B1021] p-1.5 rounded-2xl border border-cyan-500/40 inline-flex flex-wrap gap-1">
                     <button onclick="switchRuleTab('format')" id="ruletab-format" class="rule-subtab-btn btn-neon-gold px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-black">32-Team Format</button>
@@ -326,7 +312,6 @@
                 </div>
             </div>
 
-            <!-- Sub Content 1: 32-Team Format -->
             <div id="rulecontent-format" class="rule-subcontent grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 flex flex-col justify-between">
                     <div>
@@ -368,7 +353,6 @@
                 </div>
             </div>
 
-            <!-- Sub Content 2: Prizes & MVP -->
             <div id="rulecontent-prizes" class="rule-subcontent hidden space-y-6">
                 <div class="bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div>
@@ -429,7 +413,6 @@
                 </div>
             </div>
 
-            <!-- Sub Content 3: Timeline & Dates -->
             <div id="rulecontent-timeline" class="rule-subcontent hidden bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 space-y-4">
                 <h3 class="text-lg font-bold text-white mb-4">TOURNAMENT SCHEDULE</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
@@ -451,7 +434,6 @@
                 </div>
             </div>
 
-            <!-- Sub Content 4: Device & Fair Play -->
             <div id="rulecontent-device" class="rule-subcontent hidden grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6">
                     <div class="flex items-center gap-3 mb-6">
@@ -518,13 +500,11 @@
                 </div>
             </div>
 
-            <!-- Winner Banner -->
             <div id="champion-box" class="hidden bg-yellow-500/10 border border-yellow-500/40 rounded-2xl p-4 text-center">
                 <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">JUARA STAG MLBB 2026</span>
                 <h3 id="champion-team-name" class="text-2xl font-black text-yellow-400 mt-1">-</h3>
             </div>
 
-            <!-- Bracket Columns -->
             <div class="overflow-x-auto pb-6">
                 <div class="min-w-[1000px] grid grid-cols-5 gap-4">
                     <div>
@@ -553,14 +533,12 @@
 
         <!-- 6. ADMIN PANEL TAB -->
         <div id="tab-admin" class="tab-content hidden max-w-5xl mx-auto px-4 py-8 space-y-6">
-            <!-- Login Box -->
             <div id="admin-login-card" class="max-w-md mx-auto rgb-breathing-box bg-[#0B1021] rounded-3xl p-6 text-center space-y-4 border-2">
                 <h3 class="text-xl font-bold text-white">Log Masuk Admin</h3>
                 <input type="password" id="admin-pass-input" placeholder="Masukkan kata laluan admin..." class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-yellow-400">
                 <button onclick="loginAdmin()" class="btn-neon-gold w-full py-2.5 text-black font-extrabold rounded-xl text-sm uppercase">Log Masuk</button>
             </div>
 
-            <!-- Dashboard -->
             <div id="admin-dashboard" class="hidden space-y-6">
                 <div class="flex justify-between items-center bg-[#0B1021] p-4 rounded-2xl border border-cyan-500/40">
                     <div>
@@ -613,16 +591,16 @@
         <p>© 2026 STAG MLBB Tournament - SRK Taman Gembira.</p>
     </footer>
 
-    <!-- Firebase Realtime Database SDKs -->
+    <!-- Firebase Compat SDKs (App & Realtime Database) -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
     <script>
-        // YOUR REAL FIREBASE CONFIG INTEGRATED
+        // FIREBASE CREDENTIALS
         const firebaseConfig = {
             apiKey: "AIzaSyCgiyl-ZX5dNenyaA4nFV7-6mvZFBxXAdJM",
             authDomain: "mlbb-2026-1535b.firebaseapp.com",
-            databaseURL: "https://mlbb-2026-1535b-default-rtdb.firebaseio.com",
+            databaseURL: "https://mlbb-2026-1535b-default-rtdb.asia-southeast1.firebasedatabase.app",
             projectId: "mlbb-2026-1535b",
             storageBucket: "mlbb-2026-1535b.firebasestorage.app",
             messagingSenderId: "923897468114",
@@ -630,7 +608,9 @@
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
         const db = firebase.database();
 
         let state = {
@@ -645,6 +625,7 @@
             renderRosterInputs();
             startCountdown();
             listenToCloudData();
+            setupFormListener();
 
             if (window.location.hash === '#admin') {
                 switchTab('admin');
@@ -732,11 +713,17 @@
             }
         }
 
-        const regForm = document.getElementById('form-registration');
-        if (regForm) {
+        function setupFormListener() {
+            const regForm = document.getElementById('form-registration');
+            if (!regForm) return;
+
             regForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (state.teams.length >= 32) return alert('Pendaftaran penuh! Maksimum 32 Skuad.');
+                
+                if (state.teams.length >= 32) {
+                    alert('Pendaftaran penuh! Maksimum 32 Skuad.');
+                    return;
+                }
 
                 const name = document.getElementById('reg-team-name').value.trim();
                 const category = document.getElementById('reg-category').value;
@@ -744,8 +731,10 @@
 
                 const players = [];
                 for (let i = 1; i <= 6; i++) {
-                    const pName = document.getElementById(`p${i}-name`).value.trim();
-                    const pId = document.getElementById(`p${i}-id`).value.trim();
+                    const pNameInput = document.getElementById(`p${i}-name`);
+                    const pIdInput = document.getElementById(`p${i}-id`);
+                    const pName = pNameInput ? pNameInput.value.trim() : '';
+                    const pId = pIdInput ? pIdInput.value.trim() : '';
                     if (pName || pId) {
                         players.push({ name: pName || `Pemain ${i}`, gameId: pId || '-' });
                     }
@@ -754,23 +743,35 @@
                 const teamId = 'team_' + Date.now();
                 const newTeam = {
                     id: teamId,
-                    name,
-                    category,
-                    contact,
+                    name: name,
+                    category: category,
+                    contact: contact,
                     status: 'MENUNGGU',
                     timestamp: new Date().toISOString().slice(0, 16).replace('T', ' '),
-                    players
+                    players: players
                 };
 
-                db.ref('teams/' + teamId).set(newTeam, (error) => {
-                    if (error) {
-                        alert('Ralat menyimpan data: ' + error.message);
-                    } else {
+                const submitBtn = document.getElementById('btn-submit-form');
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = 'MEMPROSES...';
+                }
+
+                db.ref('teams/' + teamId).set(newTeam)
+                    .then(() => {
                         alert(`Skuad ${name} Berjaya Didaftarkan! Data telah diselaraskan ke semua peranti.`);
                         regForm.reset();
                         switchTab('teams');
-                    }
-                });
+                    })
+                    .catch((error) => {
+                        alert('Ralat menyimpan data: ' + error.message);
+                    })
+                    .finally(() => {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.innerText = 'HANTAR PENDAFTARAN SKUAD';
+                        }
+                    });
             });
         }
 
