@@ -187,12 +187,11 @@
                         <div class="pl-2">
                             <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest block mb-1">LOKASI</span>
                             <span class="text-sm sm:text-lg font-black text-white">SRK TAMAN GEMBIRA</span>
-                            <span class="block text-[10px] text-emerald-400 font-bold mt-0.5">Dewan Gemilang</span>
                         </div>
                     </div>
 
                     <div class="rgb-breathing-box bg-[#0B1021]/90 rounded-2xl p-5 text-center border-2">
-                        <h3 class="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-3">COUNTDOWN PERTANDINGAN</h3>
+                        <h3 class="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-3">COUNTDOWN TUTUP PENDAFTARAN (10/11/2026)</h3>
                         <div class="grid grid-cols-4 gap-2">
                             <div class="bg-[#050811] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-days" class="text-xl sm:text-3xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 font-bold">HARI</span></div>
                             <div class="bg-[#050811] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-hours" class="text-xl sm:text-3xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 font-bold">JAM</span></div>
@@ -251,6 +250,7 @@
                             <option value="Tahun 4">Tahun 4</option>
                             <option value="Tahun 5">Tahun 5</option>
                             <option value="Tahun 6">Tahun 6</option>
+                            <option value="Alumni STAG">Alumni STAG</option>
                         </select>
                     </div>
                 </div>
@@ -288,6 +288,7 @@
                         <option value="Tahun 4">Tahun 4</option>
                         <option value="Tahun 5">Tahun 5</option>
                         <option value="Tahun 6">Tahun 6</option>
+                        <option value="Alumni STAG">Alumni STAG</option>
                     </select>
                 </div>
             </div>
@@ -345,7 +346,7 @@
                             <i data-lucide="map-pin" class="w-5 h-5"></i>
                         </div>
                         <h3 class="text-lg font-bold text-white mb-3">PHYSICAL LAN STAGE</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Held live on-site at Sekolah Rendah Kebangsaan Taman Gembira (Dewan Gemilang). Teams must check in physically with their registered squad members matching their verified MLBB Game IDs.</p>
+                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Held live on-site at Sekolah Rendah Kebangsaan Taman Gembira. Teams must check in physically with their registered squad members matching their verified MLBB Game IDs.</p>
                     </div>
                     <div class="border-t border-gray-800/80 pt-4 text-xs">
                         <span class="text-emerald-400 font-bold">Spectators:</span> <span class="text-gray-400">Open to students, parents, and school supporters.</span>
@@ -429,7 +430,7 @@
                     <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
                         <span class="text-emerald-400 font-bold block mb-1">14 NOV 2026</span>
                         <span class="text-white font-bold text-sm block">Tournament Matchday</span>
-                        <p class="text-gray-400 mt-1">On-site LAN matches start at 9:00 AM ( Dewan Gemilang ).</p>
+                        <p class="text-gray-400 mt-1">On-site LAN matches start at 9:00 AM.</p>
                     </div>
                 </div>
             </div>
@@ -616,7 +617,7 @@
         let state = {
             teams: [],
             bracket: null,
-            targetDate: '2026-11-14T09:00:00',
+            targetDate: '2026-11-10T23:59:59',
             isAdminLoggedIn: false
         };
 
@@ -636,7 +637,13 @@
         function listenToCloudData() {
             db.ref('teams').on('value', (snapshot) => {
                 const data = snapshot.val();
-                state.teams = data ? Object.values(data) : [];
+                if (data) {
+                    state.teams = Object.keys(data).map(key => {
+                        return { id: key, ...data[key] };
+                    });
+                } else {
+                    state.teams = [];
+                }
                 renderRegisteredTeams();
                 updateStatsCounters();
                 if (state.isAdminLoggedIn) renderAdminTable();
@@ -784,7 +791,7 @@
             container.innerHTML = '';
             const filtered = state.teams.filter(t => {
                 const matchesCat = (catVal === 'ALL' || t.category === catVal);
-                const matchesSearch = t.name.toLowerCase().includes(searchVal);
+                const matchesSearch = (t.name || '').toLowerCase().includes(searchVal);
                 return matchesCat && matchesSearch;
             });
 
@@ -816,7 +823,7 @@
             const container = document.getElementById('modal-roster-players-list');
             container.innerHTML = '';
 
-            team.players.forEach((p, idx) => {
+            (team.players || []).forEach((p, idx) => {
                 const item = document.createElement('div');
                 item.className = "p-3 rounded-xl border border-cyan-500/30 bg-[#050811] flex justify-between text-xs text-gray-300";
                 item.innerHTML = `<span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span><span class="font-mono text-gray-400">${p.gameId}</span>`;
@@ -971,13 +978,25 @@
             const team = state.teams.find(t => t.id === id);
             if (team) {
                 const newStatus = team.status === 'LULUS' ? 'MENUNGGU' : 'LULUS';
-                db.ref('teams/' + id + '/status').set(newStatus);
+                db.ref('teams/' + id).update({ status: newStatus })
+                    .then(() => {
+                        console.log("Status updated successfully.");
+                    })
+                    .catch((err) => {
+                        alert("Ralat mengemas kini status: " + err.message);
+                    });
             }
         }
 
         function deleteTeam(id) {
             if (confirm('Padam skuad ini?')) {
-                db.ref('teams/' + id).remove();
+                db.ref('teams/' + id).remove()
+                    .then(() => {
+                        console.log("Team removed successfully.");
+                    })
+                    .catch((err) => {
+                        alert("Ralat memadam skuad: " + err.message);
+                    });
             }
         }
 
@@ -1003,7 +1022,13 @@
                 const now = new Date().getTime();
                 const target = new Date(state.targetDate).getTime();
                 const diff = target - now;
-                if (diff <= 0) return;
+                if (diff <= 0) {
+                    document.getElementById('cd-days').innerText = '00';
+                    document.getElementById('cd-hours').innerText = '00';
+                    document.getElementById('cd-minutes').innerText = '00';
+                    document.getElementById('cd-seconds').innerText = '00';
+                    return;
+                }
 
                 document.getElementById('cd-days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
                 document.getElementById('cd-hours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
