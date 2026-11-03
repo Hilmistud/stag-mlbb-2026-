@@ -105,6 +105,17 @@
         .glow-title {
             animation: textGlow 5s infinite ease-in-out;
         }
+
+        /* Minimalist Bracket Lines */
+        .bracket-card {
+            background: rgba(11, 16, 33, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .bracket-card:hover {
+            border-color: rgba(6, 182, 212, 0.5);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
@@ -492,41 +503,43 @@
             </div>
         </div>
 
-        <!-- 5. BRACKETS TAB (32 TEAMS) -->
+        <!-- 5. MINIMALIST BRACKETS TAB -->
         <div id="tab-brackets" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h2 class="text-2xl font-black text-white glow-title">CARTA KEJOHANAN (32 SQUAD KNOCKOUT)</h2>
-                    <p class="text-xs text-gray-400">Jadual perlawanan terkini dari Pusingan 32 hingga Final.</p>
+                    <h2 class="text-2xl font-black text-white glow-title">CARTA KEJOHANAN</h2>
+                    <p class="text-xs text-gray-400">Peringkat Kalah Mati 32 Pasukan</p>
                 </div>
             </div>
 
-            <div id="champion-box" class="hidden bg-yellow-500/10 border border-yellow-500/40 rounded-2xl p-4 text-center">
+            <!-- Champion Banner -->
+            <div id="champion-box" class="hidden bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-4 text-center">
                 <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">JUARA STAG MLBB 2026</span>
                 <h3 id="champion-team-name" class="text-2xl font-black text-yellow-400 mt-1">-</h3>
             </div>
 
+            <!-- Minimalist Columns Structure -->
             <div class="overflow-x-auto pb-6">
-                <div class="min-w-[1000px] grid grid-cols-5 gap-4">
+                <div class="min-w-[1050px] grid grid-cols-5 gap-3">
                     <div>
-                        <h4 class="text-xs font-extrabold text-cyan-400 mb-3 text-center uppercase">Round of 32</h4>
-                        <div id="bracket-r32-container" class="space-y-3"></div>
+                        <div class="text-[11px] font-bold text-gray-400 mb-3 text-center uppercase tracking-wider">Round of 32</div>
+                        <div id="bracket-r32-container" class="space-y-2"></div>
                     </div>
                     <div>
-                        <h4 class="text-xs font-extrabold text-cyan-400 mb-3 text-center uppercase">Round of 16</h4>
-                        <div id="bracket-r16-container" class="space-y-8 pt-4"></div>
+                        <div class="text-[11px] font-bold text-gray-400 mb-3 text-center uppercase tracking-wider">Round of 16</div>
+                        <div id="bracket-r16-container" class="space-y-6 pt-3"></div>
                     </div>
                     <div>
-                        <h4 class="text-xs font-extrabold text-yellow-400 mb-3 text-center uppercase">Suku Akhir (QF)</h4>
-                        <div id="bracket-qf-container" class="space-y-16 pt-8"></div>
+                        <div class="text-[11px] font-bold text-cyan-400 mb-3 text-center uppercase tracking-wider">Suku Akhir</div>
+                        <div id="bracket-qf-container" class="space-y-14 pt-6"></div>
                     </div>
                     <div>
-                        <h4 class="text-xs font-extrabold text-cyan-400 mb-3 text-center uppercase">Semi-Finals</h4>
-                        <div id="bracket-sf-container" class="space-y-32 pt-16"></div>
+                        <div class="text-[11px] font-bold text-cyan-400 mb-3 text-center uppercase tracking-wider">Semi-Finals</div>
+                        <div id="bracket-sf-container" class="space-y-28 pt-12"></div>
                     </div>
                     <div>
-                        <h4 class="text-xs font-extrabold text-yellow-400 mb-3 text-center uppercase">Grand Finals</h4>
-                        <div id="bracket-final-container" class="pt-32"></div>
+                        <div class="text-[11px] font-bold text-yellow-400 mb-3 text-center uppercase tracking-wider">Grand Finals</div>
+                        <div id="bracket-final-container" class="pt-24"></div>
                     </div>
                 </div>
             </div>
@@ -875,11 +888,11 @@
 
             if (!state.bracket || !state.bracket.r32) state.bracket = createInitial32Bracket();
 
-            state.bracket.r32.forEach(m => r32Container.appendChild(createMatchCard(m)));
-            state.bracket.r16.forEach(m => r16Container.appendChild(createMatchCard(m)));
-            state.bracket.qf.forEach(m => qfContainer.appendChild(createMatchCard(m)));
-            state.bracket.sf.forEach(m => sfContainer.appendChild(createMatchCard(m)));
-            state.bracket.final.forEach(m => fnContainer.appendChild(createMatchCard(m)));
+            state.bracket.r32.forEach(m => r32Container.appendChild(createMinimalistMatchCard(m)));
+            state.bracket.r16.forEach(m => r16Container.appendChild(createMinimalistMatchCard(m)));
+            state.bracket.qf.forEach(m => qfContainer.appendChild(createMinimalistMatchCard(m)));
+            state.bracket.sf.forEach(m => sfContainer.appendChild(createMinimalistMatchCard(m)));
+            state.bracket.final.forEach(m => fnContainer.appendChild(createMinimalistMatchCard(m)));
 
             const champ = state.bracket.final[0]?.winner;
             const champBox = document.getElementById('champion-box');
@@ -889,21 +902,22 @@
             }
         }
 
-        function createMatchCard(match) {
+        // MINIMALIST CARD CREATOR
+        function createMinimalistMatchCard(match) {
             const card = document.createElement('div');
-            card.className = "bg-[#0B1021] border border-cyan-500/30 rounded-xl p-2.5 space-y-1.5 shadow-sm";
+            card.className = "bracket-card p-2 space-y-1 shadow-sm";
             
             const isWinner1 = match.winner && match.winner === match.team1;
             const isWinner2 = match.winner && match.winner === match.team2;
 
             card.innerHTML = `
-                <div class="flex justify-between p-1.5 rounded-lg ${isWinner1 ? 'bg-emerald-950/80 border border-emerald-500/60' : 'bg-[#050811]'} text-[11px] font-bold text-white">
-                    <span class="truncate max-w-[110px] ${isWinner1 ? 'text-emerald-300' : ''}">${match.team1 || 'TBD'}</span>
-                    <span class="text-cyan-400 font-mono">${match.score1 ?? 0}</span>
+                <div class="flex justify-between items-center px-2 py-1 rounded text-[11px] ${isWinner1 ? 'bg-emerald-950/60 font-black text-emerald-300' : 'text-gray-300'}">
+                    <span class="truncate max-w-[120px]">${isWinner1 ? '✓ ' : ''}${match.team1 || 'TBD'}</span>
+                    <span class="font-mono ${isWinner1 ? 'text-emerald-400' : 'text-gray-500'}">${match.score1 ?? 0}</span>
                 </div>
-                <div class="flex justify-between p-1.5 rounded-lg ${isWinner2 ? 'bg-emerald-950/80 border border-emerald-500/60' : 'bg-[#050811]'} text-[11px] font-bold text-white">
-                    <span class="truncate max-w-[110px] ${isWinner2 ? 'text-emerald-300' : ''}">${match.team2 || 'TBD'}</span>
-                    <span class="text-cyan-400 font-mono">${match.score2 ?? 0}</span>
+                <div class="flex justify-between items-center px-2 py-1 rounded text-[11px] ${isWinner2 ? 'bg-emerald-950/60 font-black text-emerald-300' : 'text-gray-300'}">
+                    <span class="truncate max-w-[120px]">${isWinner2 ? '✓ ' : ''}${match.team2 || 'TBD'}</span>
+                    <span class="font-mono ${isWinner2 ? 'text-emerald-400' : 'text-gray-500'}">${match.score2 ?? 0}</span>
                 </div>
             `;
             return card;
@@ -934,7 +948,6 @@
             });
         }
 
-        // AUTOMATIC WINNER ADVANCEMENT ALGORITHM
         function setMatchWinner(roundKey, matchIndex, winningTeam, score1, score2) {
             if (!state.bracket) return;
             const currentBracket = JSON.parse(JSON.stringify(state.bracket));
@@ -944,14 +957,13 @@
             match.score1 = parseInt(score1) || 0;
             match.score2 = parseInt(score2) || 0;
 
-            // Define next round progression target
             let nextRoundKey = null;
             let nextMatchIndex = Math.floor(matchIndex / 2);
             let nextSlotIndex = (matchIndex % 2 === 0) ? 'team1' : 'team2';
 
             if (roundKey === 'r32') nextRoundKey = 'r16';
-            else if (roundKey === 'r16') nextRoundKey = 'qf'; // Round of 16 winner moves to Suku Akhir (QF)
-            else if (roundKey === 'qf') nextRoundKey = 'sf';  // Suku Akhir winner moves to Semi Finals
+            else if (roundKey === 'r16') nextRoundKey = 'qf';
+            else if (roundKey === 'qf') nextRoundKey = 'sf';
             else if (roundKey === 'sf') nextRoundKey = 'final';
 
             if (nextRoundKey && currentBracket[nextRoundKey][nextMatchIndex]) {
