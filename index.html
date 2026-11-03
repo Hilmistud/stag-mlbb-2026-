@@ -9,26 +9,33 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @keyframes neonPulseCyan {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(6, 182, 212, 0.4), inset 0 0 10px rgba(6, 182, 212, 0.2);
+        /* Smooth Breathing RGB Color Shift Animation */
+        @keyframes rgbBreathing {
+            0% {
                 border-color: rgba(6, 182, 212, 0.8);
+                box-shadow: 0 0 25px rgba(6, 182, 212, 0.4), inset 0 0 15px rgba(6, 182, 212, 0.2);
             }
-            50% {
-                box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), inset 0 0 20px rgba(6, 182, 212, 0.4);
-                border-color: rgba(34, 211, 238, 1);
+            33% {
+                border-color: rgba(245, 158, 11, 0.8);
+                box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.25);
+            }
+            66% {
+                border-color: rgba(236, 72, 153, 0.8);
+                box-shadow: 0 0 30px rgba(236, 72, 153, 0.5), inset 0 0 15px rgba(236, 72, 153, 0.25);
+            }
+            100% {
+                border-color: rgba(6, 182, 212, 0.8);
+                box-shadow: 0 0 25px rgba(6, 182, 212, 0.4), inset 0 0 15px rgba(6, 182, 212, 0.2);
             }
         }
 
-        @keyframes neonPulseGold {
-            0%, 100% {
-                box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 35px rgba(245, 158, 11, 0.85);
-            }
+        /* Pulsing Glow Text Effect */
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px rgba(6, 182, 212, 0.8); }
+            50% { text-shadow: 0 0 20px rgba(245, 158, 11, 0.9), 0 0 30px rgba(245, 158, 11, 0.6); }
         }
 
+        /* Moving Gradient Dynamic Background */
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -36,37 +43,36 @@
         }
 
         body {
-            background-color: #060913;
+            background-color: #050811;
             color: #F3F4F6;
             font-family: system-ui, -apple-system, sans-serif;
             background-image: 
                 radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.15) 0%, transparent 60%),
-                linear-gradient(to right, rgba(6, 182, 212, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-            background-size: 100% 100%, 30px 30px, 30px 30px;
+                linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 100% 100%, 32px 32px, 32px 32px;
         }
 
-        /* Neon Glowing Cards & Posters */
-        .neon-poster-box {
-            animation: neonPulseCyan 4s infinite ease-in-out;
+        /* RGB Breathing Borders and Cards */
+        .rgb-breathing-box {
+            animation: rgbBreathing 6s infinite ease-in-out;
         }
 
-        .neon-card {
-            border: 1px solid rgba(6, 182, 212, 0.4);
-            box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-            backdrop-filter: blur(12px);
+        .rgb-breathing-header {
+            animation: rgbBreathing 8s infinite ease-in-out;
         }
 
         /* Glowing Animated Buttons */
         .btn-neon-gold {
             background: linear-gradient(270deg, #F59E0B, #D97706, #FBBF24);
             background-size: 200% 200%;
-            animation: gradientMove 3s ease infinite, neonPulseGold 3s infinite ease-in-out;
-            transition: all 0.3s ease;
+            animation: gradientMove 3s ease infinite;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-neon-gold:hover {
             transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 0 40px rgba(245, 158, 11, 0.9);
+            box-shadow: 0 0 35px rgba(245, 158, 11, 0.9);
         }
         .btn-neon-gold:active {
             transform: translateY(0) scale(0.98);
@@ -77,7 +83,7 @@
             background-size: 200% 200%;
             animation: gradientMove 3s ease infinite;
             box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .btn-neon-cyan:hover {
             transform: translateY(-3px) scale(1.02);
@@ -91,36 +97,32 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .interactive-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.01);
             border-color: rgba(6, 182, 212, 0.8);
             box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
         }
 
-        /* Glowing Countdown Numbers */
-        .glow-text-gold {
-            text-shadow: 0 0 12px rgba(245, 158, 11, 0.8);
-        }
-        .glow-text-cyan {
-            text-shadow: 0 0 12px rgba(6, 182, 212, 0.8);
+        .glow-title {
+            animation: textGlow 5s infinite ease-in-out;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER / NAVIGATION -->
-    <header class="border-b border-cyan-500/30 bg-[#060913]/90 backdrop-blur sticky top-0 z-50">
+    <!-- HEADER / NAVIGATION WITH RGB NEON LIGHTING -->
+    <header class="border-b border-cyan-500/30 bg-[#050811]/90 backdrop-blur sticky top-0 z-50 rgb-breathing-header">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('overview')">
                 <div class="w-9 h-9 rounded-xl bg-yellow-500/10 border border-yellow-500/50 flex items-center justify-center text-yellow-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.3)]">
                     <i data-lucide="crown" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h1 class="font-black text-white text-base tracking-wider uppercase glow-text-cyan">STAG MLBB 2026</h1>
+                    <h1 class="font-black text-white text-base tracking-wider uppercase glow-title">STAG MLBB 2026</h1>
                     <p class="text-[10px] text-cyan-400 font-bold tracking-wide">SRK TAMAN GEMBIRA</p>
                 </div>
             </div>
 
-            <!-- Desktop Nav (Includes Admin Panel) -->
+            <!-- Desktop Nav (Includes Admin Panel Restored) -->
             <nav class="hidden lg:flex items-center gap-1.5">
                 <button onclick="switchTab('overview')" id="nav-overview" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-cyan-400 bg-cyan-950/70 border border-cyan-500/60 shadow-[0_0_10px_rgba(6,182,212,0.3)]">Overview</button>
                 <button onclick="switchTab('register')" id="nav-register" class="nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-gray-300 hover:text-white hover:bg-cyan-950/40">Register Squad</button>
@@ -141,7 +143,7 @@
         </div>
 
         <!-- Mobile Nav Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden border-b border-gray-800 bg-[#0B0F19] px-4 py-3 space-y-2">
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-gray-800 bg-[#0B1021] px-4 py-3 space-y-2">
             <button onclick="switchTab('overview')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-gray-300 hover:bg-gray-800">Overview</button>
             <button onclick="switchTab('register')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-gray-300 hover:bg-gray-800">Register Squad</button>
             <button onclick="switchTab('teams')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-gray-300 hover:bg-gray-800">Registered Teams</button>
@@ -154,15 +156,15 @@
     <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-grow">
         
-        <!-- 1. OVERVIEW TAB (Exact Hero Side-by-Side Neon Layout) -->
+        <!-- 1. OVERVIEW TAB -->
         <div id="tab-overview" class="tab-content max-w-7xl mx-auto px-4 py-8 space-y-8">
             
             <!-- Hero Layout: Grid 2 Columns -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
                 
-                <!-- LEFT COLUMN: Poster with Cyber Neon Pulse -->
+                <!-- LEFT COLUMN: Poster Card with Breathing RGB Neon Lighting -->
                 <div class="lg:col-span-5 flex flex-col justify-center">
-                    <div class="relative rounded-3xl p-2 bg-[#0B1021] neon-poster-box">
+                    <div class="relative rounded-3xl p-2 bg-[#0B1021] border-2 rgb-breathing-box">
                         <span class="absolute top-5 right-5 z-10 px-3 py-1 bg-red-600 text-white font-black text-[10px] rounded-full uppercase tracking-wider shadow-[0_0_15px_rgba(220,38,38,0.8)]">OFFICIAL POSTER</span>
                         <div class="rounded-2xl overflow-hidden border border-cyan-500/40">
                             <img src="poster.jpeg" alt="STAG MLBB 2026 Poster" class="w-full h-auto object-cover hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1000&q=80';">
@@ -170,22 +172,23 @@
                     </div>
                 </div>
 
-                <!-- RIGHT COLUMN: Headline, Details, Countdown, Glowing Buttons -->
+                <!-- RIGHT COLUMN: Headline, Information Card, Countdown, Glowing Buttons -->
                 <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
                     
                     <div>
                         <span class="inline-block px-3.5 py-1 rounded-full text-xs font-extrabold bg-yellow-500/10 text-yellow-400 border border-yellow-500/40 uppercase tracking-widest mb-3 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
                             GAME ON SCHOOL HEROES!
                         </span>
-                        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase leading-none mb-3 glow-text-cyan">STAG MLBB 2026</h2>
-                        <p class="text-cyan-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-4">MOBILE LEGENDS: BANG BANG TOURNAMENT</p>
+                        <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase leading-none mb-3 glow-title">STAG MLBB 2026</h2>
+                        <p class="text-cyan-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-2">MOBILE LEGENDS: BANG BANG TOURNAMENT</p>
+                        <p class="text-xs text-red-400 font-extrabold uppercase tracking-wide">Pendaftaran Terakhir: 10 / 11 / 2026</p>
                     </div>
 
                     <!-- Information Card (Tarikh & Lokasi) -->
-                    <div class="neon-card bg-[#0B1021]/80 rounded-2xl p-6 grid grid-cols-2 gap-4 text-center">
+                    <div class="rgb-breathing-box bg-[#0B1021]/90 rounded-2xl p-6 grid grid-cols-2 gap-4 text-center border-2">
                         <div class="border-r border-cyan-900/60 pr-2">
-                            <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest block mb-1">TARIKH</span>
-                            <span class="text-lg sm:text-2xl font-black text-white glow-text-cyan">14/11/2026</span>
+                            <span class="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest block mb-1">TARIKH PERTANDINGAN</span>
+                            <span class="text-lg sm:text-2xl font-black text-white">14/11/2026</span>
                             <span class="block text-[10px] text-yellow-400 font-bold mt-0.5">SABTU</span>
                         </div>
                         <div class="pl-2">
@@ -195,18 +198,18 @@
                         </div>
                     </div>
 
-                    <!-- Countdown Box with Neon Glowing Digits -->
-                    <div class="neon-card bg-[#0B1021]/80 rounded-2xl p-5 text-center">
+                    <!-- Countdown Box with RGB Border Accent -->
+                    <div class="rgb-breathing-box bg-[#0B1021]/90 rounded-2xl p-5 text-center border-2">
                         <h3 class="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-3">COUNTDOWN PERTANDINGAN</h3>
                         <div class="grid grid-cols-4 gap-2">
-                            <div class="bg-[#060913] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-days" class="text-xl sm:text-3xl font-black text-yellow-400 glow-text-gold">00</span><span class="block text-[9px] text-gray-400 font-bold">HARI</span></div>
-                            <div class="bg-[#060913] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-hours" class="text-xl sm:text-3xl font-black text-yellow-400 glow-text-gold">00</span><span class="block text-[9px] text-gray-400 font-bold">JAM</span></div>
-                            <div class="bg-[#060913] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-minutes" class="text-xl sm:text-3xl font-black text-yellow-400 glow-text-gold">00</span><span class="block text-[9px] text-gray-400 font-bold">MINIT</span></div>
-                            <div class="bg-[#060913] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-seconds" class="text-xl sm:text-3xl font-black text-yellow-400 glow-text-gold">00</span><span class="block text-[9px] text-gray-400 font-bold">SAAT</span></div>
+                            <div class="bg-[#050811] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-days" class="text-xl sm:text-3xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 font-bold">HARI</span></div>
+                            <div class="bg-[#050811] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-hours" class="text-xl sm:text-3xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 font-bold">JAM</span></div>
+                            <div class="bg-[#050811] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-minutes" class="text-xl sm:text-3xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 font-bold">MINIT</span></div>
+                            <div class="bg-[#050811] p-2.5 rounded-xl border border-cyan-500/30"><span id="cd-seconds" class="text-xl sm:text-3xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 font-bold">SAAT</span></div>
                         </div>
                     </div>
 
-                    <!-- Double CTA Buttons with Neon Waves -->
+                    <!-- Double CTA Buttons -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <button onclick="switchTab('register')" class="btn-neon-gold text-black font-black py-4 px-6 rounded-2xl text-sm uppercase tracking-wider text-center">
                             DAFTAR SQUAD NOW
@@ -241,19 +244,20 @@
         <!-- 2. REGISTER TAB -->
         <div id="tab-register" class="tab-content hidden max-w-3xl mx-auto px-4 py-8 space-y-6">
             <div class="text-center space-y-2">
-                <h2 class="text-3xl font-extrabold text-white glow-text-cyan">BORANG PENDAFTARAN SKUAD</h2>
+                <h2 class="text-3xl font-extrabold text-white glow-title">BORANG PENDAFTARAN SKUAD</h2>
+                <p class="text-xs text-yellow-400 font-bold uppercase tracking-wider">Tarikh Tutup Pendaftaran: 10 November 2026</p>
                 <p class="text-xs text-gray-400">Sila isi maklumat pasukan anda. Pemain 1-5 adalah wajib, Pemain 6 (Simpanan) adalah opsional.</p>
             </div>
 
-            <form id="form-registration" class="neon-card bg-[#0B1021] rounded-3xl p-6 space-y-6">
+            <form id="form-registration" class="rgb-breathing-box bg-[#0B1021] rounded-3xl p-6 space-y-6 border-2">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-300 mb-2">Nama Skuad *</label>
-                        <input type="text" id="reg-team-name" required placeholder="Cth: EVOS SG" class="w-full bg-[#060913] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <input type="text" id="reg-team-name" required placeholder="Cth: EVOS SG" class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-300 mb-2">Kategori (Tahun) *</label>
-                        <select id="reg-category" required class="w-full bg-[#060913] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <select id="reg-category" required class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
                             <option value="Tahun 1">Tahun 1</option>
                             <option value="Tahun 2">Tahun 2</option>
                             <option value="Tahun 3">Tahun 3</option>
@@ -266,7 +270,7 @@
 
                 <div>
                     <label class="block text-xs font-bold text-gray-300 mb-2">Nombor WhatsApp Ketua Skuad *</label>
-                    <input type="text" id="reg-contact" required placeholder="Cth: 0123456789" class="w-full bg-[#060913] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                    <input type="text" id="reg-contact" required placeholder="Cth: 0123456789" class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
                 </div>
 
                 <div class="space-y-3">
@@ -284,7 +288,7 @@
         <div id="tab-teams" class="tab-content hidden max-w-6xl mx-auto px-4 py-8 space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-800 pb-6">
                 <div>
-                    <h2 class="text-2xl font-black text-white glow-text-cyan">SENARAI PASUKAN BERDAFTAR</h2>
+                    <h2 class="text-2xl font-black text-white glow-title">SENARAI PASUKAN BERDAFTAR</h2>
                     <p class="text-xs text-gray-400">Senarai skuad yang disahkan menyertai STAG MLBB 2026.</p>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto">
@@ -307,8 +311,8 @@
         <!-- 4. RULES, PRIZES & MVP SECTION -->
         <div id="tab-rules" class="tab-content hidden max-w-6xl mx-auto px-4 py-8">
             <div class="text-center mb-8">
-                <p class="text-xs font-bold uppercase tracking-widest text-yellow-400 mb-2 glow-text-gold">OFFICIAL RULEBOOK • STAG MLBB 2026 • 32 TEAMS</p>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 glow-text-cyan">RULES, PRIZES & MVP HONOURS</h2>
+                <p class="text-xs font-bold uppercase tracking-widest text-yellow-400 mb-2">OFFICIAL RULEBOOK • STAG MLBB 2026 • 32 TEAMS</p>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 glow-title">RULES, PRIZES & MVP HONOURS</h2>
                 <p class="text-gray-400 text-sm max-w-2xl mx-auto">Standard competitive Mobile Legends: Bang Bang guidelines enforced at Sekolah Rendah Kebangsaan Taman Gembira on 14/11/2026.</p>
             </div>
 
@@ -370,11 +374,11 @@
                     <div>
                         <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">ENTRY FEE POLICY</span>
                         <h4 class="text-base font-bold text-white">Registration Fee: RM 50.00 Per Squad</h4>
-                        <p class="text-xs text-gray-400">Payment confirms your starting slot in the 32-team bracket. Payment window closes on 11 November 2026.</p>
+                        <p class="text-xs text-gray-400">Payment confirms your starting slot in the 32-team bracket. Payment window closes on 10 November 2026.</p>
                     </div>
-                    <div class="bg-[#060913] border border-cyan-500/40 rounded-xl px-4 py-2 text-right">
+                    <div class="bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2 text-right">
                         <span class="text-[9px] text-gray-400 uppercase block font-bold">TOTAL TEAM FEE</span>
-                        <span class="text-lg font-extrabold text-emerald-400 glow-text-cyan">RM 50</span>
+                        <span class="text-lg font-extrabold text-emerald-400">RM 50</span>
                     </div>
                 </div>
 
@@ -418,28 +422,28 @@
                         <h3 class="text-xl font-extrabold text-white mb-2">TOURNAMENT MVP (MOST VALUABLE PLAYER)</h3>
                         <p class="text-xs text-gray-400 max-w-2xl">Awarded to the overall top-performing player across the tournament bracket and Grand Finals. Evaluated by official referees and casters based on micro-mechanics, KDA, decisive team-fight execution, and leadership.</p>
                     </div>
-                    <div class="bg-[#060913] border border-cyan-500/40 rounded-xl px-4 py-3 text-right whitespace-nowrap">
+                    <div class="bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-3 text-right whitespace-nowrap">
                         <span class="text-[9px] text-gray-400 uppercase block font-bold">AWARD TYPE</span>
-                        <span class="text-sm font-extrabold text-yellow-400 glow-text-gold">Official MVP Trophy & Plaque</span>
+                        <span class="text-sm font-extrabold text-yellow-400">Official MVP Trophy & Plaque</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Sub Content 3: Timeline & Dates -->
+            <!-- Sub Content 3: Timeline & Dates Updated to 10/11/2026 -->
             <div id="rulecontent-timeline" class="rule-subcontent hidden bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 space-y-4">
                 <h3 class="text-lg font-bold text-white mb-4">TOURNAMENT SCHEDULE</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div class="p-4 bg-[#060913] rounded-xl border border-cyan-500/40">
-                        <span class="text-cyan-400 font-bold block mb-1">01 NOV - 11 NOV 2026</span>
+                    <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
+                        <span class="text-cyan-400 font-bold block mb-1">01 NOV - 10 NOV 2026</span>
                         <span class="text-white font-bold text-sm block">Squad Registration</span>
-                        <p class="text-gray-400 mt-1">Open for 32 team slots. Fee payment verification.</p>
+                        <p class="text-gray-400 mt-1">Open for 32 team slots. Last registration on 10/11/2026.</p>
                     </div>
-                    <div class="p-4 bg-[#060913] rounded-xl border border-cyan-500/40">
+                    <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
                         <span class="text-yellow-400 font-bold block mb-1">12 NOV 2026</span>
                         <span class="text-white font-bold text-sm block">Bracket Draw & Briefing</span>
                         <p class="text-gray-400 mt-1">Official random seeding draw live broadcast for team captains.</p>
                     </div>
-                    <div class="p-4 bg-[#060913] rounded-xl border border-cyan-500/40">
+                    <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
                         <span class="text-emerald-400 font-bold block mb-1">14 NOV 2026</span>
                         <span class="text-white font-bold text-sm block">Tournament Matchday</span>
                         <p class="text-gray-400 mt-1">On-site LAN matches start at 9:00 AM ( Dewan Gemilang ).</p>
@@ -509,7 +513,7 @@
         <div id="tab-brackets" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 space-y-6">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
-                    <h2 class="text-2xl font-black text-white glow-text-cyan">CARTA KEJOHANAN (32 SQUAD KNOCKOUT)</h2>
+                    <h2 class="text-2xl font-black text-white glow-title">CARTA KEJOHANAN (32 SQUAD KNOCKOUT)</h2>
                     <p class="text-xs text-gray-400">Jadual perlawanan terkini dari Pusingan 32 hingga Final.</p>
                 </div>
             </div>
@@ -517,7 +521,7 @@
             <!-- Winner Banner -->
             <div id="champion-box" class="hidden bg-yellow-500/10 border border-yellow-500/40 rounded-2xl p-4 text-center">
                 <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">JUARA STAG MLBB 2026</span>
-                <h3 id="champion-team-name" class="text-2xl font-black text-yellow-400 mt-1 glow-text-gold">-</h3>
+                <h3 id="champion-team-name" class="text-2xl font-black text-yellow-400 mt-1">-</h3>
             </div>
 
             <!-- Bracket Columns -->
@@ -550,9 +554,9 @@
         <!-- 6. ADMIN PANEL TAB -->
         <div id="tab-admin" class="tab-content hidden max-w-5xl mx-auto px-4 py-8 space-y-6">
             <!-- Login Box -->
-            <div id="admin-login-card" class="max-w-md mx-auto neon-card bg-[#0B1021] rounded-3xl p-6 text-center space-y-4">
-                <h3 class="text-xl font-bold text-white glow-text-gold">Log Masuk Admin</h3>
-                <input type="password" id="admin-pass-input" placeholder="Masukkan kata laluan admin..." class="w-full bg-[#060913] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-yellow-400">
+            <div id="admin-login-card" class="max-w-md mx-auto rgb-breathing-box bg-[#0B1021] rounded-3xl p-6 text-center space-y-4 border-2">
+                <h3 class="text-xl font-bold text-white">Log Masuk Admin</h3>
+                <input type="password" id="admin-pass-input" placeholder="Masukkan kata laluan admin..." class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-yellow-400">
                 <button onclick="loginAdmin()" class="btn-neon-gold w-full py-2.5 text-black font-extrabold rounded-xl text-sm uppercase">Log Masuk</button>
             </div>
 
@@ -572,7 +576,7 @@
 
                 <div class="bg-[#0B1021] border border-cyan-500/40 rounded-2xl overflow-x-auto">
                     <table class="w-full text-left text-sm text-gray-300">
-                        <thead class="bg-[#060913] text-xs uppercase text-gray-400 border-b border-gray-800">
+                        <thead class="bg-[#050811] text-xs uppercase text-gray-400 border-b border-gray-800">
                             <tr>
                                 <th class="px-6 py-3">#</th>
                                 <th class="px-6 py-3">Nama Skuad</th>
@@ -592,7 +596,7 @@
 
     <!-- ROSTER DETAIL MODAL -->
     <div id="roster-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-        <div class="neon-card bg-[#0B1021] rounded-3xl max-w-md w-full p-6 space-y-4">
+        <div class="rgb-breathing-box bg-[#0B1021] rounded-3xl max-w-md w-full p-6 space-y-4 border-2">
             <div class="flex justify-between items-center border-b border-gray-800 pb-3">
                 <div>
                     <h3 id="modal-roster-team-name" class="text-lg font-bold text-white">-</h3>
@@ -605,7 +609,7 @@
     </div>
 
     <!-- FOOTER -->
-    <footer class="border-t border-cyan-500/30 bg-[#060913] py-6 text-center text-xs text-gray-500">
+    <footer class="border-t border-cyan-500/30 bg-[#050811] py-6 text-center text-xs text-gray-500">
         <p>© 2026 STAG MLBB Tournament - SRK Taman Gembira.</p>
     </footer>
 
@@ -714,7 +718,7 @@
             for (let i = 1; i <= 6; i++) {
                 const isSub = i === 6;
                 const row = document.createElement('div');
-                row.className = "p-4 rounded-xl border border-cyan-500/30 bg-[#060913] grid grid-cols-1 sm:grid-cols-2 gap-3 items-center";
+                row.className = "p-4 rounded-xl border border-cyan-500/30 bg-[#050811] grid grid-cols-1 sm:grid-cols-2 gap-3 items-center";
                 row.innerHTML = `
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full ${isSub ? 'bg-yellow-500/20 text-yellow-400' : 'bg-cyan-500/20 text-cyan-400'} flex items-center justify-center text-xs font-bold">${i}</span>
@@ -813,7 +817,7 @@
 
             team.players.forEach((p, idx) => {
                 const item = document.createElement('div');
-                item.className = "p-3 rounded-xl border border-cyan-500/30 bg-[#060913] flex justify-between text-xs text-gray-300";
+                item.className = "p-3 rounded-xl border border-cyan-500/30 bg-[#050811] flex justify-between text-xs text-gray-300";
                 item.innerHTML = `<span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span><span class="font-mono text-gray-400">${p.gameId}</span>`;
                 container.appendChild(item);
             });
@@ -876,11 +880,11 @@
             const card = document.createElement('div');
             card.className = "bg-[#0B1021] border border-cyan-500/30 rounded-xl p-2.5 space-y-1.5 shadow-sm";
             card.innerHTML = `
-                <div class="flex justify-between p-1.5 rounded-lg bg-[#060913] text-[11px] font-bold text-white">
+                <div class="flex justify-between p-1.5 rounded-lg bg-[#050811] text-[11px] font-bold text-white">
                     <span class="truncate max-w-[110px]">${match.team1 || 'TBD'}</span>
                     <span class="text-cyan-400 font-mono">${match.score1 ?? 0}</span>
                 </div>
-                <div class="flex justify-between p-1.5 rounded-lg bg-[#060913] text-[11px] font-bold text-white">
+                <div class="flex justify-between p-1.5 rounded-lg bg-[#050811] text-[11px] font-bold text-white">
                     <span class="truncate max-w-[110px]">${match.team2 || 'TBD'}</span>
                     <span class="text-cyan-400 font-mono">${match.score2 ?? 0}</span>
                 </div>
