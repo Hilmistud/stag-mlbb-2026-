@@ -517,7 +517,7 @@
                         <div id="bracket-r16-container" class="space-y-8 pt-4"></div>
                     </div>
                     <div>
-                        <h4 class="text-xs font-extrabold text-cyan-400 mb-3 text-center uppercase">Quarter-Finals</h4>
+                        <h4 class="text-xs font-extrabold text-yellow-400 mb-3 text-center uppercase">Suku Akhir (QF)</h4>
                         <div id="bracket-qf-container" class="space-y-16 pt-8"></div>
                     </div>
                     <div>
@@ -553,6 +553,7 @@
                     </div>
                 </div>
 
+                <!-- Teams Table -->
                 <div class="bg-[#0B1021] border border-cyan-500/40 rounded-2xl overflow-x-auto">
                     <table class="w-full text-left text-sm text-gray-300">
                         <thead class="bg-[#050811] text-xs uppercase text-gray-400 border-b border-gray-800">
@@ -567,6 +568,13 @@
                         </thead>
                         <tbody id="admin-teams-table-body" class="divide-y divide-gray-800"></tbody>
                     </table>
+                </div>
+
+                <!-- Interactive Match Bracket Manager -->
+                <div class="bg-[#0B1021] border border-yellow-500/40 rounded-2xl p-6 space-y-4">
+                    <h4 class="text-base font-bold text-yellow-400 uppercase tracking-wide">Pengurusan Keputusan Perlawanan (Kemaraan ke Suku Akhir & Final)</h4>
+                    <p class="text-xs text-gray-400">Pilih Pemenang bagi setiap perlawanan. Pasukan yang menang akan **secara automatik mara** ke Round of 16, Suku Akhir (Quarter-Finals), Semi-Final, dan Grand Finals!</p>
+                    <div id="admin-bracket-manager" class="space-y-6"></div>
                 </div>
             </div>
         </div>
@@ -608,7 +616,6 @@
             appId: "1:923897468114:web:d256d850846431195ce90b"
         };
 
-        // Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
@@ -633,14 +640,11 @@
             }
         });
 
-        // REALTIME CLOUD DATABASE SYNC
         function listenToCloudData() {
             db.ref('teams').on('value', (snapshot) => {
                 const data = snapshot.val();
                 if (data) {
-                    state.teams = Object.keys(data).map(key => {
-                        return { id: key, ...data[key] };
-                    });
+                    state.teams = Object.keys(data).map(key => ({ id: key, ...data[key] }));
                 } else {
                     state.teams = [];
                 }
@@ -653,6 +657,7 @@
                 const data = snapshot.val();
                 state.bracket = data ? data : createInitial32Bracket();
                 renderBracket();
+                if (state.isAdminLoggedIn) renderAdminBracketManager();
             });
         }
 
@@ -887,13 +892,17 @@
         function createMatchCard(match) {
             const card = document.createElement('div');
             card.className = "bg-[#0B1021] border border-cyan-500/30 rounded-xl p-2.5 space-y-1.5 shadow-sm";
+            
+            const isWinner1 = match.winner && match.winner === match.team1;
+            const isWinner2 = match.winner && match.winner === match.team2;
+
             card.innerHTML = `
-                <div class="flex justify-between p-1.5 rounded-lg bg-[#050811] text-[11px] font-bold text-white">
-                    <span class="truncate max-w-[110px]">${match.team1 || 'TBD'}</span>
+                <div class="flex justify-between p-1.5 rounded-lg ${isWinner1 ? 'bg-emerald-950/80 border border-emerald-500/60' : 'bg-[#050811]'} text-[11px] font-bold text-white">
+                    <span class="truncate max-w-[110px] ${isWinner1 ? 'text-emerald-300' : ''}">${match.team1 || 'TBD'}</span>
                     <span class="text-cyan-400 font-mono">${match.score1 ?? 0}</span>
                 </div>
-                <div class="flex justify-between p-1.5 rounded-lg bg-[#050811] text-[11px] font-bold text-white">
-                    <span class="truncate max-w-[110px]">${match.team2 || 'TBD'}</span>
+                <div class="flex justify-between p-1.5 rounded-lg ${isWinner2 ? 'bg-emerald-950/80 border border-emerald-500/60' : 'bg-[#050811]'} text-[11px] font-bold text-white">
+                    <span class="truncate max-w-[110px] ${isWinner2 ? 'text-emerald-300' : ''}">${match.team2 || 'TBD'}</span>
                     <span class="text-cyan-400 font-mono">${match.score2 ?? 0}</span>
                 </div>
             `;
@@ -925,6 +934,84 @@
             });
         }
 
+        // AUTOMATIC WINNER ADVANCEMENT ALGORITHM
+        function setMatchWinner(roundKey, matchIndex, winningTeam, score1, score2) {
+            if (!state.bracket) return;
+            const currentBracket = JSON.parse(JSON.stringify(state.bracket));
+
+            const match = currentBracket[roundKey][matchIndex];
+            match.winner = winningTeam;
+            match.score1 = parseInt(score1) || 0;
+            match.score2 = parseInt(score2) || 0;
+
+            // Define next round progression target
+            let nextRoundKey = null;
+            let nextMatchIndex = Math.floor(matchIndex / 2);
+            let nextSlotIndex = (matchIndex % 2 === 0) ? 'team1' : 'team2';
+
+            if (roundKey === 'r32') nextRoundKey = 'r16';
+            else if (roundKey === 'r16') nextRoundKey = 'qf'; // Round of 16 winner moves to Suku Akhir (QF)
+            else if (roundKey === 'qf') nextRoundKey = 'sf';  // Suku Akhir winner moves to Semi Finals
+            else if (roundKey === 'sf') nextRoundKey = 'final';
+
+            if (nextRoundKey && currentBracket[nextRoundKey][nextMatchIndex]) {
+                currentBracket[nextRoundKey][nextMatchIndex][nextSlotIndex] = winningTeam;
+            }
+
+            db.ref('bracket').set(currentBracket)
+                .then(() => alert(`Pemenang perlawanan (${winningTeam}) mara ke pusingan seterusnya!`))
+                .catch(err => alert("Ralat: " + err.message));
+        }
+
+        function renderAdminBracketManager() {
+            const container = document.getElementById('admin-bracket-manager');
+            if (!container || !state.bracket) return;
+            container.innerHTML = '';
+
+            const rounds = [
+                { key: 'r32', title: 'Round of 32 (16 Matches)' },
+                { key: 'r16', title: 'Round of 16 (8 Matches)' },
+                { key: 'qf', title: 'Suku Akhir / Quarter-Finals (4 Matches)' },
+                { key: 'sf', title: 'Semi-Finals (2 Matches)' },
+                { key: 'final', title: 'Grand Finals (1 Match)' }
+            ];
+
+            rounds.forEach(r => {
+                const roundBox = document.createElement('div');
+                roundBox.className = "space-y-2 border-t border-gray-800 pt-3";
+                roundBox.innerHTML = `<h5 class="text-xs font-bold text-cyan-400 uppercase tracking-wider">${r.title}</h5>`;
+
+                const matchesList = state.bracket[r.key] || [];
+                matchesList.forEach((m, idx) => {
+                    const item = document.createElement('div');
+                    item.className = "p-3 bg-[#050811] rounded-xl border border-cyan-500/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs";
+                    item.innerHTML = `
+                        <div class="space-y-1">
+                            <span class="text-gray-400 font-mono">Perlawanan #${idx + 1}</span>
+                            <div class="font-bold text-white">${m.team1 || 'TBD'} vs ${m.team2 || 'TBD'}</div>
+                            ${m.winner ? `<span class="text-emerald-400 text-[10px] font-extrabold">Pemenang: ${m.winner}</span>` : ''}
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="number" id="sc1-${r.key}-${idx}" value="${m.score1 ?? 0}" class="w-12 bg-[#0B1021] border border-cyan-500/40 rounded px-2 py-1 text-center text-white">
+                            <span>-</span>
+                            <input type="number" id="sc2-${r.key}-${idx}" value="${m.score2 ?? 0}" class="w-12 bg-[#0B1021] border border-cyan-500/40 rounded px-2 py-1 text-center text-white">
+                            <button onclick="triggerWin('${r.key}', ${idx}, '${m.team1}')" ${(!m.team1 || m.team1 === 'TBD') ? 'disabled' : ''} class="px-2.5 py-1 bg-[#06B6D4] text-black font-extrabold rounded hover:bg-cyan-400 disabled:opacity-40">Menang T1</button>
+                            <button onclick="triggerWin('${r.key}', ${idx}, '${m.team2}')" ${(!m.team2 || m.team2 === 'TBD') ? 'disabled' : ''} class="px-2.5 py-1 bg-[#F59E0B] text-black font-extrabold rounded hover:bg-yellow-400 disabled:opacity-40">Menang T2</button>
+                        </div>
+                    `;
+                    roundBox.appendChild(item);
+                });
+
+                container.appendChild(roundBox);
+            });
+        }
+
+        function triggerWin(roundKey, matchIndex, winningTeam) {
+            const sc1 = document.getElementById(`sc1-${roundKey}-${matchIndex}`)?.value || 0;
+            const sc2 = document.getElementById(`sc2-${roundKey}-${matchIndex}`)?.value || 0;
+            setMatchWinner(roundKey, matchIndex, winningTeam, sc1, sc2);
+        }
+
         function loginAdmin() {
             const pass = document.getElementById('admin-pass-input').value;
             if (pass === 'amihandsome') {
@@ -932,6 +1019,7 @@
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
                 renderAdminTable();
+                renderAdminBracketManager();
             } else {
                 alert('Kata laluan salah!');
             }
@@ -979,24 +1067,16 @@
             if (team) {
                 const newStatus = team.status === 'LULUS' ? 'MENUNGGU' : 'LULUS';
                 db.ref('teams/' + id).update({ status: newStatus })
-                    .then(() => {
-                        console.log("Status updated successfully.");
-                    })
-                    .catch((err) => {
-                        alert("Ralat mengemas kini status: " + err.message);
-                    });
+                    .then(() => console.log("Status updated successfully."))
+                    .catch((err) => alert("Ralat mengemas kini status: " + err.message));
             }
         }
 
         function deleteTeam(id) {
             if (confirm('Padam skuad ini?')) {
                 db.ref('teams/' + id).remove()
-                    .then(() => {
-                        console.log("Team removed successfully.");
-                    })
-                    .catch((err) => {
-                        alert("Ralat memadam skuad: " + err.message);
-                    });
+                    .then(() => console.log("Team removed successfully."))
+                    .catch((err) => alert("Ralat memadam skuad: " + err.message));
             }
         }
 
