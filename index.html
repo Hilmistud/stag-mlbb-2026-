@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STAG MLBB 2026 - Tournament Management | SMK / SRK Taman Gembira</title>
+    <title>STAG MLBB 2026 - Tournament Management (32 Skuad) | SMK / SRK Taman Gembira</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -235,7 +235,7 @@
 
                 <div class="space-y-6">
                     <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-gray-800 pb-3">
-                        <i data-lucide="users" class="w-5 h-5 text-yellow-400"></i> Senarai Pemain (5 Utama + 1 Simpanan)
+                        <i data-lucide="users" class="w-5 h-5 text-yellow-400"></i> Senarai Pemain (Pemain 1 - 5 Wajib | Pemain 6 Simpanan Opsional)
                     </h3>
                     <div id="roster-inputs-container" class="space-y-4"></div>
                 </div>
@@ -387,12 +387,12 @@
                 status: 'LULUS',
                 timestamp: '2026-10-15 14:20',
                 players: [
-                    { name: 'Adam (Ketua)', gameId: 'TitanAdam', serverId: '1234' },
-                    { name: 'Sufian', gameId: 'SufianChou', serverId: '1235' },
-                    { name: 'Danish', gameId: 'DanFanny', serverId: '1236' },
-                    { name: 'Zafri', gameId: 'ZafTigreal', serverId: '1237' },
-                    { name: 'Farhan', gameId: 'FarhanMage', serverId: '1238' },
-                    { name: 'Luqman (Sub)', gameId: 'LuqSub', serverId: '1239' }
+                    { name: 'Adam (Ketua)', gameId: 'TitanAdam' },
+                    { name: 'Sufian', gameId: 'SufianChou' },
+                    { name: 'Danish', gameId: 'DanFanny' },
+                    { name: 'Zafri', gameId: 'ZafTigreal' },
+                    { name: 'Farhan', gameId: 'FarhanMage' },
+                    { name: 'Luqman (Sub)', gameId: 'LuqSub' }
                 ]
             }
         ];
@@ -465,14 +465,15 @@
             for (let i = 1; i <= 6; i++) {
                 const isSub = i === 6;
                 const row = document.createElement('div');
-                row.className = "p-4 rounded-xl border border-gray-800 bg-[#080A0F] grid grid-cols-1 sm:grid-cols-3 gap-3 items-center";
+                row.className = "p-4 rounded-xl border border-gray-800 bg-[#080A0F] grid grid-cols-1 sm:grid-cols-2 gap-3 items-center";
                 row.innerHTML = `
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full ${isSub ? 'bg-yellow-500/20 text-yellow-400' : 'bg-cyan-500/20 text-cyan-400'} flex items-center justify-center text-xs font-bold">${i}</span>
-                        <input type="text" id="p${i}-name" required placeholder="Pemain ${i} ${isSub ? '(Simpanan)' : '(Utama)'}" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <input type="text" id="p${i}-name" ${isSub ? '' : 'required'} placeholder="Pemain ${i} ${isSub ? '(Simpanan - Opsional)' : '(Utama *)'}" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
                     </div>
-                    <div><input type="text" id="p${i}-id" required placeholder="Game ID" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"></div>
-                    <div><input type="text" id="p${i}-server" required placeholder="Server ID" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"></div>
+                    <div>
+                        <input type="text" id="p${i}-id" ${isSub ? '' : 'required'} placeholder="Game ID ${isSub ? '(Opsional)' : '*'}" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+                    </div>
                 `;
                 container.appendChild(row);
             }
@@ -482,7 +483,7 @@
         if (regForm) {
             regForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                if (state.teams.length >= 32) return alert('Pendaftaran penuh!');
+                if (state.teams.length >= 32) return alert('Pendaftaran penuh! Maksimum 32 Skuad.');
 
                 const name = document.getElementById('reg-team-name').value.trim();
                 const category = document.getElementById('reg-category').value;
@@ -490,11 +491,15 @@
 
                 const players = [];
                 for (let i = 1; i <= 6; i++) {
-                    players.push({
-                        name: document.getElementById(`p${i}-name`).value.trim(),
-                        gameId: document.getElementById(`p${i}-id`).value.trim(),
-                        serverId: document.getElementById(`p${i}-server`).value.trim()
-                    });
+                    const pName = document.getElementById(`p${i}-name`).value.trim();
+                    const pId = document.getElementById(`p${i}-id`).value.trim();
+
+                    if (pName || pId) {
+                        players.push({
+                            name: pName || `Pemain ${i}`,
+                            gameId: pId || '-'
+                        });
+                    }
                 }
 
                 const newTeam = {
@@ -561,7 +566,7 @@
             team.players.forEach((p, idx) => {
                 const item = document.createElement('div');
                 item.className = "p-3 rounded-xl border border-gray-800 bg-[#080A0F] flex justify-between text-xs text-gray-300";
-                item.innerHTML = `<span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span><span class="font-mono text-gray-400">${p.gameId} (${p.serverId})</span>`;
+                item.innerHTML = `<span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span><span class="font-mono text-gray-400">${p.gameId}</span>`;
                 container.appendChild(item);
             });
 
@@ -600,7 +605,40 @@
             return card;
         }
 
-        function generateRandomBracket() { renderBracket(); }
+        function generateRandomBracket() {
+            const approvedTeams = state.teams.filter(t => t.status === 'LULUS');
+            const teamList = (approvedTeams.length >= 2 ? approvedTeams : state.teams).map(t => t.name);
+
+            if (teamList.length < 2) {
+                return alert('Sekurang-kurangnya 2 skuad diperlukan untuk menyusun bracket!');
+            }
+
+            const shuffled = [...teamList].sort(() => 0.5 - Math.random());
+            const slots = Array(8).fill('TBD');
+            for (let i = 0; i < shuffled.length && i < 8; i++) {
+                slots[i] = shuffled[i];
+            }
+
+            state.bracket = {
+                qf: [
+                    { id: 'qf1', team1: slots[0], score1: 0, team2: slots[1], score2: 0, winner: null },
+                    { id: 'qf2', team1: slots[2], score1: 0, team2: slots[3], score2: 0, winner: null },
+                    { id: 'qf3', team1: slots[4], score1: 0, team2: slots[5], score2: 0, winner: null },
+                    { id: 'qf4', team1: slots[6], score1: 0, team2: slots[7], score2: 0, winner: null }
+                ],
+                sf: [
+                    { id: 'sf1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null },
+                    { id: 'sf2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
+                ],
+                final: [
+                    { id: 'fn1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
+                ]
+            };
+
+            saveState();
+            renderBracket();
+            alert('Carta pertandingan telah di-reset dan disusun semula!');
+        }
 
         function loginAdmin() {
             const pass = document.getElementById('admin-pass-input').value;
@@ -633,13 +671,32 @@
                     <td class="px-6 py-4 font-bold text-white">${t.name}</td>
                     <td class="px-6 py-4 text-xs">${t.category}</td>
                     <td class="px-6 py-4 text-xs font-mono">${t.contact}</td>
-                    <td class="px-6 py-4"><span class="px-2 py-1 rounded text-[10px] font-bold bg-green-950 text-green-300">${t.status}</span></td>
-                    <td class="px-6 py-4 text-right">
-                        <button type="button" onclick="deleteTeam('${t.id}')" class="px-2 py-1 bg-red-950 text-red-400 rounded text-xs">Padam</button>
+                    <td class="px-6 py-4">
+                        <span class="px-2 py-1 rounded text-[10px] font-bold ${t.status === 'LULUS' ? 'bg-green-950 text-green-300' : 'bg-yellow-950 text-yellow-300'}">
+                            ${t.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right space-x-2">
+                        <button type="button" onclick="toggleApprove('${t.id}')" class="px-2 py-1 bg-green-950 text-green-400 hover:bg-green-900 border border-green-800 rounded text-xs font-bold">
+                            ${t.status === 'LULUS' ? 'Batal' : 'Lulus'}
+                        </button>
+                        <button type="button" onclick="deleteTeam('${t.id}')" class="px-2 py-1 bg-red-950 text-red-400 hover:bg-red-900 border border-red-800 rounded text-xs font-bold">
+                            Padam
+                        </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
+        }
+
+        function toggleApprove(id) {
+            const team = state.teams.find(t => t.id === id);
+            if (team) {
+                team.status = team.status === 'LULUS' ? 'MENUNGGU' : 'LULUS';
+                saveState();
+                renderAdminTable();
+                renderRegisteredTeams();
+            }
         }
 
         function deleteTeam(id) {
