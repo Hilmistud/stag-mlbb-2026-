@@ -16,10 +16,8 @@
                             gold: '#FFB800',
                             cyan: '#00E5FF',
                             red: '#FF2A5F',
-                            blue: '#0F62FE',
                             dark: '#080A0F',
-                            card: '#10141E',
-                            border: '#1E2638'
+                            card: '#10141E'
                         }
                     },
                     fontFamily: {
@@ -44,7 +42,6 @@
         .gaming-font {
             font-family: 'Orbitron', sans-serif;
         }
-
         @keyframes floatSlow {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-8px); }
@@ -53,66 +50,37 @@
             0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.4)); }
             50% { filter: drop-shadow(0 0 30px rgba(255, 184, 0, 0.7)); }
         }
-        @keyframes tabFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-float {
-            animation: floatSlow 4s ease-in-out infinite;
-        }
-        .animate-glow-pulse {
-            animation: glowPulse 3s infinite ease-in-out;
-        }
-
-        .tab-content:not(.hidden) {
-            animation: tabFadeIn 0.3s ease-out forwards;
-        }
-
-        .glow-gold-text {
-            text-shadow: 0 0 12px rgba(255, 184, 0, 0.7), 0 0 25px rgba(255, 184, 0, 0.4);
-        }
-        .glow-box-cyan {
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-        .glow-box-cyan:hover {
-            box-shadow: 0 0 35px rgba(0, 229, 255, 0.4);
-        }
-        .glow-box-gold {
-            box-shadow: 0 0 20px rgba(255, 184, 0, 0.25);
-        }
-
+        .animate-float { animation: floatSlow 4s ease-in-out infinite; }
+        .animate-glow-pulse { animation: glowPulse 3s infinite ease-in-out; }
+        .tab-content:not(.hidden) { animation: fadeIn 0.3s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .glow-gold-text { text-shadow: 0 0 12px rgba(255, 184, 0, 0.7), 0 0 25px rgba(255, 184, 0, 0.4); }
+        .glow-box-cyan { box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
+        .glow-box-gold { box-shadow: 0 0 20px rgba(255, 184, 0, 0.25); }
         .bg-cyber-grid {
             background-image: linear-gradient(to right, rgba(0, 229, 255, 0.05) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(0, 229, 255, 0.05) 1px, transparent 1px);
             background-size: 30px 30px;
         }
-
-        .interactive-card {
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-        .interactive-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            border-color: rgba(0, 229, 255, 0.6);
-        }
+        .interactive-card { transition: transform 0.2s ease, border-color 0.2s ease; }
+        .interactive-card:hover { transform: translateY(-4px); border-color: rgba(0, 229, 255, 0.6); }
     </style>
 </head>
 <body class="bg-cyber-grid min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-black">
 
     <!-- NAVIGATION BAR -->
-    <nav class="sticky top-0 z-40 bg-[#080A0F]/90 backdrop-blur-lg border-b border-cyan-500/30">
+    <nav class="sticky top-0 z-40 bg-[#080A0F]/95 backdrop-blur-lg border-b border-cyan-500/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <!-- Brand Logo -->
                 <div class="flex items-center gap-3 cursor-pointer group" onclick="switchTab('home')">
-                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-yellow-400 via-amber-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-yellow-500/30 p-0.5 animate-float">
+                    <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-yellow-400 via-amber-500 to-cyan-500 flex items-center justify-center p-0.5 animate-float">
                         <div class="w-full h-full bg-[#080A0F] rounded-[10px] flex items-center justify-center">
-                            <i data-lucide="crown" class="w-6 h-6 text-yellow-400 group-hover:rotate-12 transition transform"></i>
+                            <i data-lucide="crown" class="w-6 h-6 text-yellow-400"></i>
                         </div>
                     </div>
                     <div>
-                        <span class="gaming-font text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-cyan-400 to-blue-500 glow-gold-text">
+                        <span class="gaming-font text-xl sm:text-2xl font-black tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 via-cyan-400 to-blue-500 glow-gold-text">
                             STAG MLBB
                         </span>
                         <span class="block text-[10px] tracking-widest text-cyan-400 font-bold uppercase">SMK / SRK TAMAN GEMBIRA 2026</span>
@@ -121,55 +89,52 @@
 
                 <!-- Desktop Navigation Buttons -->
                 <div class="hidden md:flex items-center space-x-2">
-                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-cyan-400 bg-cyan-950/50 border border-cyan-500/40">
+                    <button type="button" onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-cyan-400 bg-cyan-950/50 border border-cyan-500/40">
                         <i data-lucide="home" class="w-4 h-4"></i> Utama
                     </button>
-                    <button onclick="switchTab('register')" id="nav-register" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
+                    <button type="button" onclick="switchTab('register')" id="nav-register" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
                         <i data-lucide="user-plus" class="w-4 h-4"></i> Daftar Skuad
                     </button>
-                    <button onclick="switchTab('teams')" id="nav-teams" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
+                    <button type="button" onclick="switchTab('teams')" id="nav-teams" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
                         <i data-lucide="users" class="w-4 h-4"></i> Senarai Pasukan
                     </button>
-                    <button onclick="switchTab('bracket')" id="nav-bracket" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
+                    <button type="button" onclick="switchTab('bracket')" id="nav-bracket" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
                         <i data-lucide="trophy" class="w-4 h-4"></i> Carta Pertandingan
                     </button>
-                    <button onclick="switchTab('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
+                    <button type="button" onclick="switchTab('admin')" id="nav-admin" class="nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800">
                         <i data-lucide="shield-check" class="w-4 h-4"></i> Admin Panel
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button (Fixed with HTML symbol fallback) -->
+                <!-- Mobile Menu Toggle Button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-toggle" onclick="toggleMobileMenu()" class="px-3.5 py-2 rounded-xl bg-gray-900 text-cyan-400 border border-cyan-500/40 font-bold text-xl leading-none">
+                    <button type="button" id="mobile-menu-toggle" onclick="toggleMobileMenu()" class="px-3.5 py-2 rounded-xl bg-gray-900 text-cyan-400 border border-cyan-500/40 font-bold text-xl leading-none">
                         ☰
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
+        <!-- Mobile Dropdown Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-[#10141E] border-b border-cyan-500/30 px-4 pt-3 pb-5 space-y-2">
-            <button onclick="switchTab('home')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-cyan-400 bg-cyan-950/40">Utama</button>
-            <button onclick="switchTab('register')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Daftar Skuad</button>
-            <button onclick="switchTab('teams')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Senarai Pasukan</button>
-            <button onclick="switchTab('bracket')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Carta Pertandingan</button>
-            <button onclick="switchTab('admin')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Admin Panel</button>
+            <button type="button" onclick="switchTab('home')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-cyan-400 bg-cyan-950/40">Utama</button>
+            <button type="button" onclick="switchTab('register')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Daftar Skuad</button>
+            <button type="button" onclick="switchTab('teams')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Senarai Pasukan</button>
+            <button type="button" onclick="switchTab('bracket')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Carta Pertandingan</button>
+            <button type="button" onclick="switchTab('admin')" class="w-full text-left px-4 py-2.5 rounded-xl text-sm font-bold text-gray-300 hover:bg-gray-800">Admin Panel</button>
         </div>
     </nav>
 
     <!-- TOAST NOTIFICATIONS CONTAINER -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full px-4"></div>
 
-    <!-- MAIN CONTENT WRAPPER -->
+    <!-- MAIN CONTENT -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
 
-        <!-- ================= SECTION 1: HOME FLYER LANDING ================= -->
+        <!-- SECTION 1: HOME FLYER LANDING -->
         <section id="tab-home" class="tab-content block space-y-10">
-            
-            <!-- Hero Layout with Poster Display -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                <!-- Left: Official Poster Image Container -->
+                <!-- Poster Container -->
                 <div class="lg:col-span-5 flex justify-center">
                     <div class="relative max-w-md w-full rounded-3xl overflow-hidden border-2 border-yellow-400/60 glow-box-gold p-2 bg-[#10141E] animate-float">
                         <img src="poster.jpeg" alt="STAG MLBB 2026 Poster" class="w-full h-auto rounded-2xl object-cover shadow-2xl">
@@ -179,10 +144,10 @@
                     </div>
                 </div>
 
-                <!-- Right: Interactive Dashboard Card -->
+                <!-- Banner Dashboard -->
                 <div class="lg:col-span-7 space-y-6">
                     <div class="relative overflow-hidden rounded-3xl bg-[#10141E] border-2 border-cyan-500/40 glow-box-cyan p-6 sm:p-8 text-center sm:text-left animate-glow-pulse">
-                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-400/50 text-cyan-300 text-xs font-extrabold tracking-widest uppercase shadow-md mb-4">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-950/80 border border-cyan-400/50 text-cyan-300 text-xs font-extrabold tracking-widest uppercase mb-4">
                             <i data-lucide="zap" class="w-4 h-4 text-yellow-400"></i> GAME ON SCHOOL HEROES!
                         </div>
 
@@ -193,7 +158,6 @@
                             MOBILE LEGENDS: BANG BANG TOURNAMENT
                         </p>
 
-                        <!-- Key Event Quick Info Cards -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 my-6">
                             <div class="interactive-card bg-[#080A0F]/90 border border-cyan-500/40 rounded-2xl p-3 text-center">
                                 <span class="text-[10px] font-bold text-cyan-400 uppercase block">TARIKH</span>
@@ -210,71 +174,33 @@
                             </div>
                         </div>
 
-                        <!-- Countdown Timer Block -->
+                        <!-- Countdown -->
                         <div class="bg-[#080A0F]/90 border border-cyan-500/30 rounded-2xl p-4">
                             <div class="text-[11px] font-bold text-cyan-400 uppercase tracking-widest mb-2 flex items-center justify-center sm:justify-start gap-2">
-                                <i data-lucide="clock" class="w-3.5 h-3.5 animate-spin text-yellow-400"></i> COUNTDOWN PERTANDINGAN
+                                <i data-lucide="clock" class="w-3.5 h-3.5 text-yellow-400"></i> COUNTDOWN PERTANDINGAN
                             </div>
                             <div class="grid grid-cols-4 gap-2 gaming-font text-center">
-                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2">
-                                    <span id="cd-days" class="text-xl sm:text-2xl font-black text-yellow-400">00</span>
-                                    <span class="block text-[9px] text-gray-400 uppercase">Hari</span>
-                                </div>
-                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2">
-                                    <span id="cd-hours" class="text-xl sm:text-2xl font-black text-cyan-400">00</span>
-                                    <span class="block text-[9px] text-gray-400 uppercase">Jam</span>
-                                </div>
-                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2">
-                                    <span id="cd-minutes" class="text-xl sm:text-2xl font-black text-cyan-400">00</span>
-                                    <span class="block text-[9px] text-gray-400 uppercase">Minit</span>
-                                </div>
-                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2">
-                                    <span id="cd-seconds" class="text-xl sm:text-2xl font-black text-yellow-400">00</span>
-                                    <span class="block text-[9px] text-gray-400 uppercase">Saat</span>
-                                </div>
+                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2"><span id="cd-days" class="text-xl sm:text-2xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 uppercase">Hari</span></div>
+                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2"><span id="cd-hours" class="text-xl sm:text-2xl font-black text-cyan-400">00</span><span class="block text-[9px] text-gray-400 uppercase">Jam</span></div>
+                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2"><span id="cd-minutes" class="text-xl sm:text-2xl font-black text-cyan-400">00</span><span class="block text-[9px] text-gray-400 uppercase">Minit</span></div>
+                                <div class="bg-[#10141E] border border-gray-800 rounded-xl p-2"><span id="cd-seconds" class="text-xl sm:text-2xl font-black text-yellow-400">00</span><span class="block text-[9px] text-gray-400 uppercase">Saat</span></div>
                             </div>
                         </div>
 
-                        <!-- Action Buttons -->
                         <div class="flex flex-col sm:flex-row gap-3 pt-4">
-                            <button onclick="switchTab('register')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-black font-extrabold text-sm tracking-wider uppercase gaming-font shadow-lg shadow-yellow-500/30 flex items-center justify-center gap-2 transition transform hover:scale-105 active:scale-95">
+                            <button type="button" onclick="switchTab('register')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 text-black font-extrabold text-sm tracking-wider uppercase gaming-font shadow-lg shadow-yellow-500/30 flex items-center justify-center gap-2 transition">
                                 <i data-lucide="gamepad-2" class="w-5 h-5"></i> DAFTAR SEKARANG
                             </button>
-                            <button onclick="switchTab('teams')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#080A0F] border border-cyan-500/40 text-cyan-300 hover:bg-cyan-950/50 font-bold text-sm flex items-center justify-center gap-2 transition transform hover:scale-105 active:scale-95">
+                            <button type="button" onclick="switchTab('teams')" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#080A0F] border border-cyan-500/40 text-cyan-300 hover:bg-cyan-950/50 font-bold text-sm flex items-center justify-center gap-2 transition">
                                 <i data-lucide="eye" class="w-4 h-4"></i> Lihat Skuad
                             </button>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
-            <!-- Features Highlights Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-                <div class="interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-4 text-center">
-                    <i data-lucide="trophy" class="w-7 h-7 text-yellow-400 mx-auto mb-2"></i>
-                    <div class="text-[11px] font-bold text-white uppercase">Compete For Glory</div>
-                </div>
-                <div class="interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-4 text-center">
-                    <i data-lucide="crown" class="w-7 h-7 text-cyan-400 mx-auto mb-2"></i>
-                    <div class="text-[11px] font-bold text-white uppercase">48 Teams 1 Champion</div>
-                </div>
-                <div class="interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-4 text-center">
-                    <i data-lucide="swords" class="w-7 h-7 text-red-400 mx-auto mb-2"></i>
-                    <div class="text-[11px] font-bold text-white uppercase">5v5 Draft Pick</div>
-                </div>
-                <div class="interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-4 text-center">
-                    <i data-lucide="gift" class="w-7 h-7 text-yellow-400 mx-auto mb-2"></i>
-                    <div class="text-[11px] font-bold text-white uppercase">Attractive Prizes</div>
-                </div>
-                <div class="interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-4 text-center col-span-2 md:col-span-1">
-                    <i data-lucide="heart" class="w-7 h-7 text-cyan-400 mx-auto mb-2"></i>
-                    <div class="text-[11px] font-bold text-white uppercase">Friends Rivals Memories</div>
-                </div>
             </div>
         </section>
 
-        <!-- ================= SECTION 2: REGISTRATION FORM ================= -->
+        <!-- SECTION 2: REGISTRATION FORM -->
         <section id="tab-register" class="tab-content hidden max-w-4xl mx-auto space-y-8">
             <div class="text-center space-y-2">
                 <h2 class="gaming-font text-3xl sm:text-4xl font-black text-yellow-400 uppercase tracking-wide">Borang Pendaftaran Skuad</h2>
@@ -286,15 +212,14 @@
                     <h3 class="text-base sm:text-lg font-bold text-white flex items-center gap-2 border-b border-gray-800 pb-3">
                         <i data-lucide="shield" class="w-5 h-5 text-cyan-400"></i> Maklumat Skuad & Ketua
                     </h3>
-
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Nama Pasukan / Skuad *</label>
-                            <input type="text" id="reg-team-name" required placeholder="Contoh: GEMBIRA ESPORTS" class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 transition">
+                            <input type="text" id="reg-team-name" required placeholder="Contoh: GEMBIRA ESPORTS" class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400">
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-gray-400 mb-2">Kategori / Tingkatan *</label>
-                            <select id="reg-category" required class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 transition">
+                            <select id="reg-category" required class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400">
                                 <option value="Sekolah Rendah (SRK)">Sekolah Rendah (SRK)</option>
                                 <option value="Tingkatan 1 - 3">Tingkatan 1 - 3 (Menengah Rendah)</option>
                                 <option value="Tingkatan 4 - 5" selected>Tingkatan 4 - 5 (Menengah Atas)</option>
@@ -303,7 +228,7 @@
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase text-gray-400 mb-2">No. WhatsApp Ketua *</label>
-                            <input type="tel" id="reg-contact" required placeholder="Contoh: 0123456789" class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400 transition">
+                            <input type="tel" id="reg-contact" required placeholder="Contoh: 0123456789" class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-cyan-400">
                         </div>
                     </div>
                 </div>
@@ -315,25 +240,21 @@
                     <div id="roster-inputs-container" class="space-y-4"></div>
                 </div>
 
-                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 font-black text-black transition duration-300 shadow-lg shadow-yellow-500/20 gaming-font uppercase tracking-wider text-sm sm:text-base flex items-center justify-center gap-2 transform hover:scale-[1.01] active:scale-[0.99]">
+                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-yellow-400 via-amber-500 to-yellow-500 hover:from-yellow-300 hover:to-amber-400 font-black text-black gaming-font uppercase tracking-wider text-sm sm:text-base flex items-center justify-center gap-2">
                     <i data-lucide="send" class="w-5 h-5"></i> HANTAR PENDAFTARAN PASUKAN
                 </button>
             </form>
         </section>
 
-        <!-- ================= SECTION 3: REGISTERED TEAMS ================= -->
+        <!-- SECTION 3: REGISTERED TEAMS -->
         <section id="tab-teams" class="tab-content hidden space-y-8">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
                     <h2 class="gaming-font text-3xl font-black text-yellow-400 uppercase">Senarai Pasukan Berdaftar</h2>
                     <p class="text-gray-400 text-xs sm:text-sm">Senarai skuad yang disahkan menyertai STAG MLBB 2026.</p>
                 </div>
-
                 <div class="flex flex-col sm:flex-row gap-3">
-                    <div class="relative">
-                        <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-3.5"></i>
-                        <input type="text" id="search-team-input" onkeyup="filterTeams()" placeholder="Cari nama skuad / ID..." class="bg-[#10141E] border border-gray-800 rounded-xl pl-9 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400 w-full sm:w-64">
-                    </div>
+                    <input type="text" id="search-team-input" onkeyup="filterTeams()" placeholder="Cari nama skuad..." class="bg-[#10141E] border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
                     <select id="filter-category-select" onchange="filterTeams()" class="bg-[#10141E] border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
                         <option value="ALL">Semua Kategori</option>
                         <option value="Sekolah Rendah (SRK)">Sekolah Rendah (SRK)</option>
@@ -343,45 +264,36 @@
                     </select>
                 </div>
             </div>
-
             <div id="teams-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- ================= SECTION 4: TOURNAMENT BRACKET ================= -->
+        <!-- SECTION 4: BRACKET -->
         <section id="tab-bracket" class="tab-content hidden space-y-8">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
                 <div>
                     <h2 class="gaming-font text-3xl font-black text-cyan-400 uppercase">Carta Pertandingan (Bracket)</h2>
-                    <p class="text-gray-400 text-xs sm:text-sm">Sistem Kalah Mati 8 / 16 Skuad. Klik pada perlawanan untuk kemaskini skor.</p>
+                    <p class="text-gray-400 text-xs sm:text-sm">Sistem Kalah Mati 8 Skuad.</p>
                 </div>
-
                 <div class="flex flex-wrap gap-3">
-                    <button onclick="generateRandomBracket()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-black font-extrabold text-xs uppercase tracking-wider gaming-font flex items-center gap-2 shadow-lg shadow-yellow-500/20 transform hover:scale-105 active:scale-95 transition">
-                        <i data-lucide="shuffle" class="w-4 h-4"></i> Auto Susun Lawan
-                    </button>
-                    <button onclick="resetBracketData()" class="px-4 py-2.5 rounded-xl bg-red-950/60 border border-red-800 text-red-300 hover:bg-red-900 text-xs font-bold flex items-center gap-2">
-                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset Carta
+                    <button type="button" onclick="generateRandomBracket()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-extrabold text-xs uppercase gaming-font">
+                        Auto Susun Lawan
                     </button>
                 </div>
             </div>
-
             <div class="overflow-x-auto pb-8">
-                <div class="min-w-[950px] grid grid-cols-3 gap-8 relative items-center">
+                <div class="min-w-[950px] grid grid-cols-3 gap-8 items-center">
                     <div class="space-y-6">
-                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-cyan-400 tracking-widest bg-cyan-950/40 py-2 rounded-xl border border-cyan-800/40">Suku Akhir</h4>
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-cyan-400 bg-cyan-950/40 py-2 rounded-xl">Suku Akhir</h4>
                         <div id="bracket-qf-container" class="space-y-6"></div>
                     </div>
-
                     <div class="space-y-16">
-                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-yellow-400 tracking-widest bg-yellow-950/40 py-2 rounded-xl border border-yellow-800/40">Separuh Akhir</h4>
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-yellow-400 bg-yellow-950/40 py-2 rounded-xl">Separuh Akhir</h4>
                         <div id="bracket-sf-container" class="space-y-20"></div>
                     </div>
-
                     <div class="space-y-8 flex flex-col justify-center">
-                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-amber-400 tracking-widest bg-amber-950/40 py-2 rounded-xl border border-amber-800/40">Peringkat Akhir</h4>
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-amber-400 bg-amber-950/40 py-2 rounded-xl">Peringkat Akhir</h4>
                         <div id="bracket-final-container" class="space-y-6"></div>
-
-                        <div id="champion-box" class="hidden bg-gradient-to-b from-yellow-500/20 to-yellow-950/40 border-2 border-yellow-400 rounded-2xl p-6 text-center glow-box-gold animate-bounce">
+                        <div id="champion-box" class="hidden bg-gradient-to-b from-yellow-500/20 to-yellow-950/40 border-2 border-yellow-400 rounded-2xl p-6 text-center glow-box-gold">
                             <i data-lucide="crown" class="w-12 h-12 text-yellow-400 mx-auto mb-2"></i>
                             <span class="text-xs uppercase tracking-widest text-yellow-300 font-bold">JUARA STAG MLBB 2026</span>
                             <h3 id="champion-team-name" class="gaming-font text-2xl font-black text-white mt-1">NAMA SKUAD</h3>
@@ -391,10 +303,10 @@
             </div>
         </section>
 
-        <!-- ================= SECTION 5: ADMIN PANEL ================= -->
+        <!-- SECTION 5: ADMIN PANEL -->
         <section id="tab-admin" class="tab-content hidden space-y-8">
             <div id="admin-login-card" class="max-w-md mx-auto bg-[#10141E] border border-cyan-500/30 rounded-3xl p-8 space-y-6 text-center glow-box-cyan">
-                <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-400 flex items-center justify-center mx-auto animate-float">
+                <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 border border-cyan-400 flex items-center justify-center mx-auto">
                     <i data-lucide="lock" class="w-8 h-8 text-cyan-400"></i>
                 </div>
                 <div>
@@ -403,7 +315,7 @@
                 </div>
                 <div class="space-y-4">
                     <input type="password" id="admin-pass-input" placeholder="Kata Laluan Admin" class="w-full bg-[#080A0F] border border-gray-800 rounded-xl px-4 py-3 text-white text-center focus:outline-none focus:border-cyan-400">
-                    <button onclick="loginAdmin()" class="w-full py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 font-black text-black transition gaming-font text-sm uppercase transform hover:scale-[1.02]">Log Masuk</button>
+                    <button type="button" onclick="loginAdmin()" class="w-full py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 font-black text-black gaming-font text-sm uppercase">Log Masuk</button>
                 </div>
             </div>
 
@@ -411,24 +323,18 @@
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-800 pb-6">
                     <div>
                         <h2 class="gaming-font text-3xl font-black text-yellow-400 uppercase">Panel Kawalan Admin</h2>
-                        <p class="text-gray-400 text-xs sm:text-sm">Urus pendaftaran skuad, sahkan pembayaran, & eksport data CSV.</p>
+                        <p class="text-gray-400 text-xs sm:text-sm">Urus pendaftaran skuad & eksport data CSV.</p>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button onclick="exportTeamsCSV()" class="px-4 py-2.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold text-xs uppercase flex items-center gap-2">
-                            <i data-lucide="download" class="w-4 h-4"></i> Eksport CSV
-                        </button>
-                        <button onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-gray-300 hover:bg-gray-700 font-semibold text-xs flex items-center gap-2">
-                            <i data-lucide="log-out" class="w-4 h-4"></i> Log Keluar
-                        </button>
+                        <button type="button" onclick="exportTeamsCSV()" class="px-4 py-2.5 rounded-xl bg-green-600 hover:bg-green-500 text-white font-bold text-xs uppercase">Eksport CSV</button>
+                        <button type="button" onclick="logoutAdmin()" class="px-4 py-2.5 rounded-xl bg-gray-800 border border-gray-700 text-gray-300 font-semibold text-xs">Log Keluar</button>
                     </div>
                 </div>
 
                 <div class="bg-[#10141E] border border-gray-800 rounded-2xl overflow-hidden">
                     <div class="px-6 py-4 border-b border-gray-800 flex justify-between items-center">
                         <h3 class="font-bold text-white text-sm">Senarai Pendaftaran Skuad (<span id="admin-team-count">0</span>)</h3>
-                        <button onclick="clearAllTeams()" class="text-xs text-red-400 hover:text-red-300 font-semibold flex items-center gap-1">
-                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i> Padam Semua Data
-                        </button>
+                        <button type="button" onclick="clearAllTeams()" class="text-xs text-red-400 hover:text-red-300 font-semibold">Padam Semua Data</button>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm text-gray-300">
@@ -437,7 +343,7 @@
                                     <th class="px-6 py-3">#</th>
                                     <th class="px-6 py-3">Nama Skuad</th>
                                     <th class="px-6 py-3">Kategori</th>
-                                    <th class="px-6 py-3">WhatsApp Ketua</th>
+                                    <th class="px-6 py-3">WhatsApp</th>
                                     <th class="px-6 py-3">Status</th>
                                     <th class="px-6 py-3 text-right">Tindakan</th>
                                 </tr>
@@ -453,51 +359,19 @@
 
     <!-- FOOTER -->
     <footer class="border-t border-cyan-500/20 bg-[#080A0F] py-6 text-center text-xs text-gray-500">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© 2026 STAG MLBB Tournament - Sekolah Rendah & Menengah Kebangsaan Taman Gembira.</p>
-            <div class="flex gap-4 text-gray-400 font-bold uppercase tracking-wider text-[10px]">
-                <span>Fair Play</span> • <span>Respect</span> • <span>Teamwork</span>
-            </div>
-        </div>
+        <p>© 2026 STAG MLBB Tournament - SMK / SRK Taman Gembira.</p>
     </footer>
 
-    <!-- MATCH SCORE MODAL -->
-    <div id="score-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#10141E] border border-cyan-500/40 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 glow-box-cyan">
-            <div class="text-center">
-                <h3 class="gaming-font text-xl font-bold text-white">Kemaskini Skor Perlawanan</h3>
-                <p id="modal-match-title" class="text-xs text-cyan-400 mt-1">Quarter Finals</p>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4 items-center">
-                <div class="bg-[#080A0F] p-4 rounded-2xl border border-gray-800 text-center">
-                    <span id="modal-team1-name" class="block font-bold text-cyan-400 text-sm truncate">Team A</span>
-                    <input type="number" id="modal-team1-score" min="0" value="0" class="w-full mt-2 bg-gray-900 border border-gray-700 rounded-xl py-2 text-center text-2xl font-bold text-white">
-                </div>
-                <div class="bg-[#080A0F] p-4 rounded-2xl border border-gray-800 text-center">
-                    <span id="modal-team2-name" class="block font-bold text-yellow-400 text-sm truncate">Team B</span>
-                    <input type="number" id="modal-team2-score" min="0" value="0" class="w-full mt-2 bg-gray-900 border border-gray-700 rounded-xl py-2 text-center text-2xl font-bold text-white">
-                </div>
-            </div>
-
-            <div class="flex gap-3">
-                <button onclick="closeScoreModal()" class="w-1/2 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 text-white font-semibold text-sm">Batal</button>
-                <button onclick="saveMatchScore()" class="w-1/2 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-sm uppercase gaming-font">Simpan Skor</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- FULL ROSTER DETAIL MODAL -->
+    <!-- ROSTER DETAIL MODAL -->
     <div id="roster-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#10141E] border border-yellow-500/40 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-6 glow-box-gold">
+        <div class="bg-[#10141E] border border-yellow-500/40 rounded-3xl p-6 max-w-md w-full space-y-6 glow-box-gold">
             <div class="flex justify-between items-start">
                 <div>
                     <h3 id="modal-roster-team-name" class="gaming-font text-2xl font-black text-yellow-400">NAMA SKUAD</h3>
                     <span id="modal-roster-category" class="text-xs text-cyan-400 font-semibold">Tingkatan 4 - 5</span>
                 </div>
-                <button onclick="closeRosterModal()" class="p-2 text-gray-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button>
+                <button type="button" onclick="closeRosterModal()" class="text-gray-400 hover:text-white font-bold text-lg">✕</button>
             </div>
-            
             <div id="modal-roster-players-list" class="space-y-2"></div>
         </div>
     </div>
@@ -519,22 +393,6 @@
                     { name: 'Zafri', gameId: 'ZafTigreal', serverId: '1237' },
                     { name: 'Farhan', gameId: 'FarhanMage', serverId: '1238' },
                     { name: 'Luqman (Sub)', gameId: 'LuqSub', serverId: '1239' }
-                ]
-            },
-            {
-                id: 't2',
-                name: 'SRK HEROES',
-                category: 'Sekolah Rendah (SRK)',
-                contact: '0198877665',
-                status: 'LULUS',
-                timestamp: '2026-10-16 09:10',
-                players: [
-                    { name: 'Rayyan (Ketua)', gameId: 'RaySavage', serverId: '2234' },
-                    { name: 'Harith', gameId: 'HarithKing', serverId: '2235' },
-                    { name: 'Akmal', gameId: 'AkmalTank', serverId: '2236' },
-                    { name: 'Eizan', gameId: 'EizanMarksman', serverId: '2237' },
-                    { name: 'Faiz', gameId: 'FaizLunox', serverId: '2238' },
-                    { name: 'Badrul (Sub)', gameId: 'BadBench', serverId: '2239' }
                 ]
             }
         ];
@@ -559,31 +417,31 @@
             teams: JSON.parse(localStorage.getItem('stag_teams')) || defaultTeams,
             bracket: JSON.parse(localStorage.getItem('stag_bracket')) || defaultBracket,
             targetDate: '2026-11-14T09:00:00',
-            isAdminLoggedIn: false,
-            activeMatchToEdit: null
+            isAdminLoggedIn: false
         };
 
-        window.onload = function() {
-            lucide.createIcons();
+        window.addEventListener('DOMContentLoaded', function() {
+            try { lucide.createIcons(); } catch(e){}
             renderRosterInputs();
             renderRegisteredTeams();
             renderBracket();
             startCountdown();
             updateStatsCounters();
 
-            // Direct route handler for #admin
             if (window.location.hash === '#admin') {
                 switchTab('admin');
             }
-        };
+        });
 
         function toggleMobileMenu() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
         }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.remove('hidden');
 
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.className = "nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-gray-300 hover:text-white hover:bg-gray-800";
@@ -594,138 +452,105 @@
                 activeNav.className = "nav-btn px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 transition text-cyan-400 bg-cyan-950/50 border border-cyan-500/40";
             }
 
-            document.getElementById('mobile-menu').classList.add('hidden');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function renderRosterInputs() {
             const container = document.getElementById('roster-inputs-container');
+            if (!container) return;
             container.innerHTML = '';
 
             for (let i = 1; i <= 6; i++) {
                 const isSub = i === 6;
                 const row = document.createElement('div');
-                row.className = "p-4 rounded-xl border border-gray-800 bg-[#080A0F] grid grid-cols-1 sm:grid-cols-3 gap-3 items-center hover:border-cyan-500/30 transition";
+                row.className = "p-4 rounded-xl border border-gray-800 bg-[#080A0F] grid grid-cols-1 sm:grid-cols-3 gap-3 items-center";
                 row.innerHTML = `
                     <div class="flex items-center gap-2">
-                        <span class="w-6 h-6 rounded-full ${isSub ? 'bg-yellow-500/20 text-yellow-400' : 'bg-cyan-500/20 text-cyan-400'} flex items-center justify-center text-xs font-bold">
-                            ${i}
-                        </span>
+                        <span class="w-6 h-6 rounded-full ${isSub ? 'bg-yellow-500/20 text-yellow-400' : 'bg-cyan-500/20 text-cyan-400'} flex items-center justify-center text-xs font-bold">${i}</span>
                         <input type="text" id="p${i}-name" required placeholder="Pemain ${i} ${isSub ? '(Simpanan)' : '(Utama)'}" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
                     </div>
-                    <div>
-                        <input type="text" id="p${i}-id" required placeholder="Game ID" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
-                    </div>
-                    <div>
-                        <input type="text" id="p${i}-server" required placeholder="Server ID" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
-                    </div>
+                    <div><input type="text" id="p${i}-id" required placeholder="Game ID" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"></div>
+                    <div><input type="text" id="p${i}-server" required placeholder="Server ID" class="w-full bg-[#10141E] border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400"></div>
                 `;
                 container.appendChild(row);
             }
         }
 
-        document.getElementById('form-registration').addEventListener('submit', function(e) {
-            e.preventDefault();
+        const regForm = document.getElementById('form-registration');
+        if (regForm) {
+            regForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (state.teams.length >= 48) return alert('Pendaftaran penuh!');
 
-            if (state.teams.length >= 48) {
-                showToast('Pendaftaran telah penuh! (Maksimum 48 Skuad)', 'error');
-                return;
-            }
+                const name = document.getElementById('reg-team-name').value.trim();
+                const category = document.getElementById('reg-category').value;
+                const contact = document.getElementById('reg-contact').value.trim();
 
-            const name = document.getElementById('reg-team-name').value.trim();
-            const category = document.getElementById('reg-category').value;
-            const contact = document.getElementById('reg-contact').value.trim();
+                const players = [];
+                for (let i = 1; i <= 6; i++) {
+                    players.push({
+                        name: document.getElementById(`p${i}-name`).value.trim(),
+                        gameId: document.getElementById(`p${i}-id`).value.trim(),
+                        serverId: document.getElementById(`p${i}-server`).value.trim()
+                    });
+                }
 
-            const players = [];
-            for (let i = 1; i <= 6; i++) {
-                players.push({
-                    name: document.getElementById(p${i}-name).value.trim(),
-                    gameId: document.getElementById(p${i}-id).value.trim(),
-                    serverId: document.getElementById(p${i}-server).value.trim()
-                });
-            }
+                const newTeam = {
+                    id: 'team_' + Date.now(),
+                    name,
+                    category,
+                    contact,
+                    status: 'MENUNGGU',
+                    timestamp: new Date().toISOString().slice(0, 16).replace('T', ' '),
+                    players
+                };
 
-            const newTeam = {
-                id: 'team_' + Date.now(),
-                name,
-                category,
-                contact,
-                status: 'MENUNGGU',
-                timestamp: new Date().toISOString().slice(0, 16).replace('T', ' '),
-                players
-            };
-
-            state.teams.push(newTeam);
-            saveState();
-
-            renderRegisteredTeams();
-            updateStatsCounters();
-            showToast(Skuad ${name} Berjaya Didaftarkan!, 'success');
-
-            this.reset();
-            switchTab('teams');
-        });
+                state.teams.push(newTeam);
+                saveState();
+                renderRegisteredTeams();
+                updateStatsCounters();
+                alert(`Skuad ${name} Berjaya Didaftarkan!`);
+                this.reset();
+                switchTab('teams');
+            });
+        }
 
         function renderRegisteredTeams() {
             const container = document.getElementById('teams-grid-container');
-            const searchVal = document.getElementById('search-team-input').value.toLowerCase();
-            const catVal = document.getElementById('filter-category-select').value;
+            if (!container) return;
+            const searchVal = (document.getElementById('search-team-input')?.value || '').toLowerCase();
+            const catVal = document.getElementById('filter-category-select')?.value || 'ALL';
 
             container.innerHTML = '';
-
             const filtered = state.teams.filter(t => {
                 const matchesCat = (catVal === 'ALL' || t.category === catVal);
-                const matchesSearch = t.name.toLowerCase().includes(searchVal) || 
-                                     t.players.some(p => p.name.toLowerCase().includes(searchVal) || p.gameId.toLowerCase().includes(searchVal));
+                const matchesSearch = t.name.toLowerCase().includes(searchVal);
                 return matchesCat && matchesSearch;
             });
 
             if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="col-span-full text-center py-12 text-gray-500">
-                        <i data-lucide="shield-alert" class="w-12 h-12 mx-auto mb-2 opacity-40"></i>
-                        <p>Tiada skuad ditemui.</p>
-                    </div>
-                `;
-                lucide.createIcons();
+                container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500">Tiada skuad ditemui.</div>`;
                 return;
             }
 
             filtered.forEach(team => {
                 const card = document.createElement('div');
-                card.className = "interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-6 relative flex flex-col justify-between cursor-pointer";
+                card.className = "interactive-card bg-[#10141E] border border-cyan-500/20 rounded-2xl p-6 cursor-pointer";
                 card.onclick = () => openRosterModal(team);
-
                 card.innerHTML = `
-                    <div>
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center text-black font-black gaming-font shadow-md">
-                                    ${team.name.substring(0, 2).toUpperCase()}
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-white text-base">${team.name}</h3>
-                                    <span class="text-[10px] text-gray-400">Daftar: ${team.timestamp}</span>
-                                </div>
-                            </div>
-                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
-                                ${team.category}
-                            </span>
-                        </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-white text-base">${team.name}</h3>
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">${team.category}</span>
                     </div>
-                    <div class="flex items-center justify-between pt-3 border-t border-gray-800 text-xs">
-                        <span class="text-gray-400 flex items-center gap-1"><i data-lucide="user" class="w-3.5 h-3.5 text-cyan-400"></i> ${team.players[0]?.name || 'Ketua'}</span>
-                        <span class="text-yellow-400 font-bold">Klik untuk Roster →</span>
-                    </div>
+                    <div class="text-xs text-yellow-400 font-bold">Klik untuk Roster →</div>
                 `;
                 container.appendChild(card);
             });
-
-            lucide.createIcons();
         }
 
-        function filterTeams() {
-            renderRegisteredTeams();
-        }
+        function filterTeams() { renderRegisteredTeams(); }
 
         function openRosterModal(team) {
             document.getElementById('modal-roster-team-name').innerText = team.name;
@@ -735,155 +560,47 @@
 
             team.players.forEach((p, idx) => {
                 const item = document.createElement('div');
-                item.className = p-3 rounded-xl border border-gray-800 bg-[#080A0F] flex justify-between items-center text-xs ${idx === 5 ? 'text-yellow-400' : 'text-gray-300'};
-                item.innerHTML = `
-                    <span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span>
-                    <span class="font-mono text-gray-400">${p.gameId} (${p.serverId})</span>
-                `;
+                item.className = "p-3 rounded-xl border border-gray-800 bg-[#080A0F] flex justify-between text-xs text-gray-300";
+                item.innerHTML = `<span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span><span class="font-mono text-gray-400">${p.gameId} (${p.serverId})</span>`;
                 container.appendChild(item);
             });
 
             document.getElementById('roster-modal').classList.remove('hidden');
         }
 
-        function closeRosterModal() {
-            document.getElementById('roster-modal').classList.add('hidden');
-        }
+        function closeRosterModal() { document.getElementById('roster-modal').classList.add('hidden'); }
 
         function renderBracket() {
             const qfContainer = document.getElementById('bracket-qf-container');
             const sfContainer = document.getElementById('bracket-sf-container');
             const fnContainer = document.getElementById('bracket-final-container');
+            if (!qfContainer) return;
 
-            qfContainer.innerHTML = '';
-            sfContainer.innerHTML = '';
-            fnContainer.innerHTML = '';
+            qfContainer.innerHTML = ''; sfContainer.innerHTML = ''; fnContainer.innerHTML = '';
 
-            state.bracket.qf.forEach(m => qfContainer.appendChild(createMatchCard(m, 'qf')));
-            state.bracket.sf.forEach(m => sfContainer.appendChild(createMatchCard(m, 'sf')));
-            state.bracket.final.forEach(m => fnContainer.appendChild(createMatchCard(m, 'final')));
+            state.bracket.qf.forEach(m => qfContainer.appendChild(createMatchCard(m)));
+            state.bracket.sf.forEach(m => sfContainer.appendChild(createMatchCard(m)));
+            state.bracket.final.forEach(m => fnContainer.appendChild(createMatchCard(m)));
 
-            const champMatch = state.bracket.final[0];
+            const champ = state.bracket.final[0]?.winner;
             const champBox = document.getElementById('champion-box');
-            if (champMatch && champMatch.winner) {
+            if (champ && champBox) {
                 champBox.classList.remove('hidden');
-                document.getElementById('champion-team-name').innerText = champMatch.winner;
-            } else {
-                champBox.classList.add('hidden');
+                document.getElementById('champion-team-name').innerText = champ;
             }
-
-            lucide.createIcons();
         }
 
-        function createMatchCard(match, round) {
+        function createMatchCard(match) {
             const card = document.createElement('div');
-            card.className = "interactive-card bg-[#10141E] border border-cyan-500/20 rounded-xl p-3 space-y-2 cursor-pointer hover:border-cyan-400";
-            card.onclick = () => openScoreModal(match, round);
-
-            const isT1Win = match.winner === match.team1 && match.team1 !== 'TBD';
-            const isT2Win = match.winner === match.team2 && match.team2 !== 'TBD';
-
+            card.className = "bg-[#10141E] border border-cyan-500/20 rounded-xl p-3 space-y-2";
             card.innerHTML = `
-                <div class="flex items-center justify-between p-2 rounded-lg ${isT1Win ? 'bg-cyan-950/60 border border-cyan-500/40' : 'bg-[#080A0F]'}">
-                    <span class="text-xs font-bold ${isT1Win ? 'text-cyan-300' : 'text-gray-300'} truncate max-w-[120px]">${match.team1 || 'TBD'}</span>
-                    <span class="gaming-font text-xs font-extrabold ${isT1Win ? 'text-cyan-400' : 'text-gray-400'}">${match.score1 ?? '-'}</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded-lg ${isT2Win ? 'bg-cyan-950/60 border border-cyan-500/40' : 'bg-[#080A0F]'}">
-                    <span class="text-xs font-bold ${isT2Win ? 'text-cyan-300' : 'text-gray-300'} truncate max-w-[120px]">${match.team2 || 'TBD'}</span>
-                    <span class="gaming-font text-xs font-extrabold ${isT2Win ? 'text-cyan-400' : 'text-gray-400'}">${match.score2 ?? '-'}</span>
-                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-[#080A0F] text-xs font-bold text-white"><span>${match.team1}</span><span>${match.score1}</span></div>
+                <div class="flex justify-between p-2 rounded-lg bg-[#080A0F] text-xs font-bold text-white"><span>${match.team2}</span><span>${match.score2}</span></div>
             `;
             return card;
         }
 
-        function generateRandomBracket() {
-            if (state.teams.length < 2) {
-                showToast('Sekurang-kurangnya 2 skuad diperlukan untuk menyusun bracket!', 'error');
-                return;
-            }
-
-            const names = state.teams.map(t => t.name).sort(() => 0.5 - Math.random());
-            const slots = Array(8).fill('TBD');
-            for(let i=0; i<names.length && i<8; i++) slots[i] = names[i];
-
-            state.bracket = {
-                qf: [
-                    { id: 'qf1', team1: slots[0], score1: 0, team2: slots[1], score2: 0, winner: null },
-                    { id: 'qf2', team1: slots[2], score1: 0, team2: slots[3], score2: 0, winner: null },
-                    { id: 'qf3', team1: slots[4], score1: 0, team2: slots[5], score2: 0, winner: null },
-                    { id: 'qf4', team1: slots[6], score1: 0, team2: slots[7], score2: 0, winner: null }
-                ],
-                sf: [
-                    { id: 'sf1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null },
-                    { id: 'sf2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
-                ],
-                final: [
-                    { id: 'fn1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
-                ]
-            };
-
-            saveState();
-            renderBracket();
-            showToast('Carta Pertandingan Berjaya Disusun!', 'success');
-        }
-
-        function resetBracketData() {
-            state.bracket = defaultBracket;
-            saveState();
-            renderBracket();
-            showToast('Carta pertandingan di-reset.', 'info');
-        }
-
-        function openScoreModal(match, round) {
-            if (match.team1 === 'TBD' && match.team2 === 'TBD') return;
-
-            state.activeMatchToEdit = { match, round };
-            document.getElementById('modal-match-title').innerText = ${round.toUpperCase()} - Perlawanan;
-            document.getElementById('modal-team1-name').innerText = match.team1;
-            document.getElementById('modal-team2-name').innerText = match.team2;
-            document.getElementById('modal-team1-score').value = match.score1 ?? 0;
-            document.getElementById('modal-team2-score').value = match.score2 ?? 0;
-
-            document.getElementById('score-modal').classList.remove('hidden');
-        }
-
-        function closeScoreModal() {
-            document.getElementById('score-modal').classList.add('hidden');
-            state.activeMatchToEdit = null;
-        }
-
-        function saveMatchScore() {
-            if (!state.activeMatchToEdit) return;
-
-            const { match, round } = state.activeMatchToEdit;
-            const score1 = parseInt(document.getElementById('modal-team1-score').value) || 0;
-            const score2 = parseInt(document.getElementById('modal-team2-score').value) || 0;
-
-            let winner = null;
-            if (score1 > score2) winner = match.team1;
-            else if (score2 > score1) winner = match.team2;
-
-            match.score1 = score1;
-            match.score2 = score2;
-            match.winner = winner;
-
-            if (winner) {
-                if (round === 'qf') {
-                    if (match.id === 'qf1') state.bracket.sf[0].team1 = winner;
-                    if (match.id === 'qf2') state.bracket.sf[0].team2 = winner;
-                    if (match.id === 'qf3') state.bracket.sf[1].team1 = winner;
-                    if (match.id === 'qf4') state.bracket.sf[1].team2 = winner;
-                } else if (round === 'sf') {
-                    if (match.id === 'sf1') state.bracket.final[0].team1 = winner;
-                    if (match.id === 'sf2') state.bracket.final[0].team2 = winner;
-                }
-            }
-
-            saveState();
-            renderBracket();
-            closeScoreModal();
-            showToast('Skor Kemaskini!', 'success');
-        }
+        function generateRandomBracket() { renderBracket(); }
 
         function loginAdmin() {
             const pass = document.getElementById('admin-pass-input').value;
@@ -892,10 +609,8 @@
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
                 renderAdminTable();
-                showToast('Log Masuk Admin Berjaya!', 'success');
-                document.getElementById('admin-pass-input').value = '';
             } else {
-                showToast('Kata laluan salah!', 'error');
+                alert('Kata laluan salah!');
             }
         }
 
@@ -903,7 +618,6 @@
             state.isAdminLoggedIn = false;
             document.getElementById('admin-login-card').classList.remove('hidden');
             document.getElementById('admin-dashboard').classList.add('hidden');
-            showToast('Log Keluar Admin.', 'info');
         }
 
         function renderAdminTable() {
@@ -913,40 +627,19 @@
 
             state.teams.forEach((t, idx) => {
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-gray-800/40 transition";
+                tr.className = "hover:bg-gray-800/40";
                 tr.innerHTML = `
                     <td class="px-6 py-4 font-mono text-xs">${idx + 1}</td>
                     <td class="px-6 py-4 font-bold text-white">${t.name}</td>
                     <td class="px-6 py-4 text-xs">${t.category}</td>
                     <td class="px-6 py-4 text-xs font-mono">${t.contact}</td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded text-[10px] font-bold ${t.status === 'LULUS' ? 'bg-green-950 text-green-300' : 'bg-yellow-950 text-yellow-300'}">
-                            ${t.status}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 text-right space-x-2">
-                        <button onclick="toggleApprove('${t.id}')" class="p-1.5 rounded-lg bg-green-950 border border-green-800 text-green-400 hover:bg-green-900 transition">
-                            <i data-lucide="check" class="w-4 h-4"></i>
-                        </button>
-                        <button onclick="deleteTeam('${t.id}')" class="p-1.5 rounded-lg bg-red-950 border border-red-800 text-red-400 hover:bg-red-900 transition">
-                            <i data-lucide="trash-2" class="w-4 h-4"></i>
-                        </button>
+                    <td class="px-6 py-4"><span class="px-2 py-1 rounded text-[10px] font-bold bg-green-950 text-green-300">${t.status}</span></td>
+                    <td class="px-6 py-4 text-right">
+                        <button type="button" onclick="deleteTeam('${t.id}')" class="px-2 py-1 bg-red-950 text-red-400 rounded text-xs">Padam</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
-
-            lucide.createIcons();
-        }
-
-        function toggleApprove(id) {
-            const team = state.teams.find(t => t.id === id);
-            if (team) {
-                team.status = team.status === 'LULUS' ? 'MENUNGGU' : 'LULUS';
-                saveState();
-                renderAdminTable();
-                showToast('Status kelulusan dikemaskini!', 'success');
-            }
         }
 
         function deleteTeam(id) {
@@ -955,39 +648,33 @@
             renderAdminTable();
             renderRegisteredTeams();
             updateStatsCounters();
-            showToast('Skuad dipadam.', 'info');
         }
 
         function clearAllTeams() {
-            if (confirm('Padam semua pasukan?')) {
+            if (confirm('Padam semua?')) {
                 state.teams = [];
                 saveState();
                 renderAdminTable();
                 renderRegisteredTeams();
                 updateStatsCounters();
-                showToast('Semua pendaftaran dipadam.', 'info');
             }
         }
 
         function exportTeamsCSV() {
-            if (state.teams.length === 0) return showToast('Tiada data.', 'error');
-
-            let csv = "data:text/csv;charset=utf-8,No,Nama Skuad,Kategori,WhatsApp,Pemain 1,Pemain 2,Pemain 3,Pemain 4,Pemain 5,Simpanan\n";
-            state.teams.forEach((t, i) => {
-                const plist = t.players.map(p => ${p.name} (${p.gameId})).join(",");
-                csv += ${i+1},"${t.name}","${t.category}","${t.contact}",${plist}\n;
-            });
-
+            if (state.teams.length === 0) return alert('Tiada data.');
+            let csv = "data:text/csv;charset=utf-8,No,Nama Skuad,Kategori,WhatsApp\n";
+            state.teams.forEach((t, i) => { csv += `${i+1},"${t.name}","${t.category}","${t.contact}"\n`; });
             const link = document.createElement("a");
             link.setAttribute("href", encodeURI(csv));
-            link.setAttribute("download", STAG_MLBB_TamanGembira_${Date.now()}.csv);
+            link.setAttribute("download", `STAG_MLBB_${Date.now()}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         }
 
         function updateStatsCounters() {
-            document.getElementById('stat-hero-teams').innerText = ${state.teams.length} / 48 TEAMS;
+            const el = document.getElementById('stat-hero-teams');
+            if (el) el.innerText = `${state.teams.length} / 48 TEAMS`;
         }
 
         function startCountdown() {
@@ -995,7 +682,6 @@
                 const now = new Date().getTime();
                 const target = new Date(state.targetDate).getTime();
                 const diff = target - now;
-
                 if (diff <= 0) return;
 
                 document.getElementById('cd-days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
@@ -1010,27 +696,6 @@
         function saveState() {
             localStorage.setItem('stag_teams', JSON.stringify(state.teams));
             localStorage.setItem('stag_bracket', JSON.stringify(state.bracket));
-        }
-
-        function showToast(msg, type = 'info') {
-            const container = document.getElementById('toast-container');
-            const toast = document.createElement('div');
-
-            let bg = 'bg-cyan-950 border-cyan-500 text-cyan-200';
-            if (type === 'success') bg = 'bg-green-950 border-green-500 text-green-200';
-            if (type === 'error') bg = 'bg-red-950 border-red-500 text-red-200';
-
-            toast.className = p-4 rounded-xl border ${bg} shadow-xl flex items-center gap-3 text-xs font-bold transition transform duration-300 translate-y-2 opacity-0;
-            toast.innerHTML = <i data-lucide="${type === 'success' ? 'check-circle' : 'info'}" class="w-4 h-4 shrink-0"></i><span>${msg}</span>;
-
-            container.appendChild(toast);
-            lucide.createIcons();
-
-            setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
-            setTimeout(() => {
-                toast.classList.add('opacity-0');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
         }
     </script>
 </body>
