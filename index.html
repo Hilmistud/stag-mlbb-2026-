@@ -267,31 +267,49 @@
             <div id="teams-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
-        <!-- SECTION 4: BRACKET -->
+        <!-- SECTION 4: BRACKET (32 SLOTS FULL KNOCKOUT) -->
         <section id="tab-bracket" class="tab-content hidden space-y-8">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-800 pb-6">
                 <div>
-                    <h2 class="gaming-font text-3xl font-black text-cyan-400 uppercase">Carta Pertandingan (Bracket)</h2>
-                    <p class="text-gray-400 text-xs sm:text-sm">Sistem Kalah Mati 8 Skuad.</p>
+                    <h2 class="gaming-font text-3xl font-black text-cyan-400 uppercase">Carta Pertandingan (Bracket 32 Skuad)</h2>
+                    <p class="text-gray-400 text-xs sm:text-sm">Sistem Kalah Mati Penuh 32 Pasukan (5 Peringkat Pertandingan).</p>
                 </div>
                 <div class="flex flex-wrap gap-3">
                     <button type="button" onclick="generateRandomBracket()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-extrabold text-xs uppercase gaming-font">
-                        Auto Susun Lawan
+                        Auto Susun Lawan (32 Slot)
                     </button>
                 </div>
             </div>
             <div class="overflow-x-auto pb-8">
-                <div class="min-w-[950px] grid grid-cols-3 gap-8 items-center">
-                    <div class="space-y-6">
-                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-cyan-400 bg-cyan-950/40 py-2 rounded-xl">Suku Akhir</h4>
-                        <div id="bracket-qf-container" class="space-y-6"></div>
+                <div class="min-w-[1500px] grid grid-cols-5 gap-6 items-center">
+                    
+                    <!-- Round 1: 32 Teams (16 Matches) -->
+                    <div class="space-y-4">
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-cyan-400 bg-cyan-950/40 py-2 rounded-xl border border-cyan-800/40">Pusingan 32 (16 Perlawanan)</h4>
+                        <div id="bracket-r32-container" class="space-y-3"></div>
                     </div>
+
+                    <!-- Round 2: 16 Teams (8 Matches) -->
+                    <div class="space-y-8">
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-blue-400 bg-blue-950/40 py-2 rounded-xl border border-blue-800/40">Pusingan 16 (8 Perlawanan)</h4>
+                        <div id="bracket-r16-container" class="space-y-8"></div>
+                    </div>
+
+                    <!-- Round 3: Quarter Finals (4 Matches) -->
                     <div class="space-y-16">
-                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-yellow-400 bg-yellow-950/40 py-2 rounded-xl">Separuh Akhir</h4>
-                        <div id="bracket-sf-container" class="space-y-20"></div>
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-cyan-300 bg-cyan-950/40 py-2 rounded-xl border border-cyan-800/40">Suku Akhir (4 Perlawanan)</h4>
+                        <div id="bracket-qf-container" class="space-y-20"></div>
                     </div>
+
+                    <!-- Round 4: Semi Finals (2 Matches) -->
+                    <div class="space-y-24">
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-yellow-400 bg-yellow-950/40 py-2 rounded-xl border border-yellow-800/40">Separuh Akhir</h4>
+                        <div id="bracket-sf-container" class="space-y-32"></div>
+                    </div>
+
+                    <!-- Round 5: Grand Finals + Champion -->
                     <div class="space-y-8 flex flex-col justify-center">
-                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-amber-400 bg-amber-950/40 py-2 rounded-xl">Peringkat Akhir</h4>
+                        <h4 class="gaming-font text-center text-xs font-extrabold uppercase text-amber-400 bg-amber-950/40 py-2 rounded-xl border border-amber-800/40">Peringkat Akhir</h4>
                         <div id="bracket-final-container" class="space-y-6"></div>
                         <div id="champion-box" class="hidden bg-gradient-to-b from-yellow-500/20 to-yellow-950/40 border-2 border-yellow-400 rounded-2xl p-6 text-center glow-box-gold">
                             <i data-lucide="crown" class="w-12 h-12 text-yellow-400 mx-auto mb-2"></i>
@@ -299,6 +317,7 @@
                             <h3 id="champion-team-name" class="gaming-font text-2xl font-black text-white mt-1">NAMA SKUAD</h3>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -379,43 +398,36 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         const defaultTeams = [
-            {
-                id: 't1',
-                name: 'GEMBIRA TITANS',
-                category: 'Tingkatan 4 - 5',
-                contact: '0123456789',
-                status: 'LULUS',
-                timestamp: '2026-10-15 14:20',
-                players: [
-                    { name: 'Adam (Ketua)', gameId: 'TitanAdam' },
-                    { name: 'Sufian', gameId: 'SufianChou' },
-                    { name: 'Danish', gameId: 'DanFanny' },
-                    { name: 'Zafri', gameId: 'ZafTigreal' },
-                    { name: 'Farhan', gameId: 'FarhanMage' },
-                    { name: 'Luqman (Sub)', gameId: 'LuqSub' }
-                ]
-            }
+            { id: 't1', name: 'GEMBIRA TITANS', category: 'Tingkatan 4 - 5', contact: '0123456789', status: 'LULUS', timestamp: '2026-10-15 14:20', players: [{ name: 'Adam (Ketua)', gameId: 'TitanAdam' }] }
         ];
 
-        const defaultBracket = {
-            qf: [
-                { id: 'qf1', team1: 'GEMBIRA TITANS', score1: 2, team2: 'SRK HEROES', score2: 0, winner: 'GEMBIRA TITANS' },
-                { id: 'qf2', team1: 'STAG VIPERS', score1: 1, team2: 'TAMAN KINGS', score2: 2, winner: 'TAMAN KINGS' },
-                { id: 'qf3', team1: 'CYBER GEMBIRA', score1: 2, team2: 'ALPHA SQUAD', score2: 1, winner: 'CYBER GEMBIRA' },
-                { id: 'qf4', team1: 'NEON WARRIORS', score1: 0, team2: 'ROYAL ESPORTS', score2: 2, winner: 'ROYAL ESPORTS' }
-            ],
-            sf: [
-                { id: 'sf1', team1: 'GEMBIRA TITANS', score1: 2, team2: 'TAMAN KINGS', score2: 1, winner: 'GEMBIRA TITANS' },
-                { id: 'sf2', team1: 'CYBER GEMBIRA', score1: 0, team2: 'ROYAL ESPORTS', score2: 2, winner: 'ROYAL ESPORTS' }
-            ],
-            final: [
-                { id: 'fn1', team1: 'GEMBIRA TITANS', score1: 3, team2: 'ROYAL ESPORTS', score2: 1, winner: 'GEMBIRA TITANS' }
-            ]
-        };
+        // 32-Team Default Bracket Structure (5 Rounds)
+        function createInitial32Bracket() {
+            const r32 = [];
+            for (let i = 1; i <= 16; i++) {
+                r32.push({ id: `r32_${i}`, team1: `Skuad ${i*2 - 1}`, score1: 0, team2: `Skuad ${i*2}`, score2: 0, winner: null });
+            }
+            const r16 = [];
+            for (let i = 1; i <= 8; i++) {
+                r16.push({ id: `r16_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
+            }
+            const qf = [];
+            for (let i = 1; i <= 4; i++) {
+                qf.push({ id: `qf_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
+            }
+            const sf = [
+                { id: 'sf_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null },
+                { id: 'sf_2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
+            ];
+            const final = [
+                { id: 'fn_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
+            ];
+            return { r32, r16, qf, sf, final };
+        }
 
         let state = {
             teams: JSON.parse(localStorage.getItem('stag_teams')) || defaultTeams,
-            bracket: JSON.parse(localStorage.getItem('stag_bracket')) || defaultBracket,
+            bracket: JSON.parse(localStorage.getItem('stag_bracket')) || createInitial32Bracket(),
             targetDate: '2026-11-14T09:00:00',
             isAdminLoggedIn: false
         };
@@ -576,13 +588,19 @@
         function closeRosterModal() { document.getElementById('roster-modal').classList.add('hidden'); }
 
         function renderBracket() {
+            const r32Container = document.getElementById('bracket-r32-container');
+            const r16Container = document.getElementById('bracket-r16-container');
             const qfContainer = document.getElementById('bracket-qf-container');
             const sfContainer = document.getElementById('bracket-sf-container');
             const fnContainer = document.getElementById('bracket-final-container');
-            if (!qfContainer) return;
+            if (!r32Container) return;
 
-            qfContainer.innerHTML = ''; sfContainer.innerHTML = ''; fnContainer.innerHTML = '';
+            r32Container.innerHTML = ''; r16Container.innerHTML = ''; qfContainer.innerHTML = ''; sfContainer.innerHTML = ''; fnContainer.innerHTML = '';
 
+            if (!state.bracket.r32) state.bracket = createInitial32Bracket();
+
+            state.bracket.r32.forEach(m => r32Container.appendChild(createMatchCard(m)));
+            state.bracket.r16.forEach(m => r16Container.appendChild(createMatchCard(m)));
             state.bracket.qf.forEach(m => qfContainer.appendChild(createMatchCard(m)));
             state.bracket.sf.forEach(m => sfContainer.appendChild(createMatchCard(m)));
             state.bracket.final.forEach(m => fnContainer.appendChild(createMatchCard(m)));
@@ -597,10 +615,16 @@
 
         function createMatchCard(match) {
             const card = document.createElement('div');
-            card.className = "bg-[#10141E] border border-cyan-500/20 rounded-xl p-3 space-y-2";
+            card.className = "bg-[#10141E] border border-cyan-500/20 rounded-xl p-2.5 space-y-1.5 shadow-sm";
             card.innerHTML = `
-                <div class="flex justify-between p-2 rounded-lg bg-[#080A0F] text-xs font-bold text-white"><span>${match.team1}</span><span>${match.score1}</span></div>
-                <div class="flex justify-between p-2 rounded-lg bg-[#080A0F] text-xs font-bold text-white"><span>${match.team2}</span><span>${match.score2}</span></div>
+                <div class="flex justify-between p-1.5 rounded-lg bg-[#080A0F] text-[11px] font-bold text-white">
+                    <span class="truncate max-w-[110px]">${match.team1 || 'TBD'}</span>
+                    <span class="text-cyan-400 font-mono">${match.score1 ?? 0}</span>
+                </div>
+                <div class="flex justify-between p-1.5 rounded-lg bg-[#080A0F] text-[11px] font-bold text-white">
+                    <span class="truncate max-w-[110px]">${match.team2 || 'TBD'}</span>
+                    <span class="text-cyan-400 font-mono">${match.score2 ?? 0}</span>
+                </div>
             `;
             return card;
         }
@@ -614,30 +638,21 @@
             }
 
             const shuffled = [...teamList].sort(() => 0.5 - Math.random());
-            const slots = Array(8).fill('TBD');
-            for (let i = 0; i < shuffled.length && i < 8; i++) {
+            const slots = Array(32).fill('TBD');
+            for (let i = 0; i < shuffled.length && i < 32; i++) {
                 slots[i] = shuffled[i];
             }
 
-            state.bracket = {
-                qf: [
-                    { id: 'qf1', team1: slots[0], score1: 0, team2: slots[1], score2: 0, winner: null },
-                    { id: 'qf2', team1: slots[2], score1: 0, team2: slots[3], score2: 0, winner: null },
-                    { id: 'qf3', team1: slots[4], score1: 0, team2: slots[5], score2: 0, winner: null },
-                    { id: 'qf4', team1: slots[6], score1: 0, team2: slots[7], score2: 0, winner: null }
-                ],
-                sf: [
-                    { id: 'sf1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null },
-                    { id: 'sf2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
-                ],
-                final: [
-                    { id: 'fn1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
-                ]
-            };
+            const newBracket = createInitial32Bracket();
+            for (let i = 0; i < 16; i++) {
+                newBracket.r32[i].team1 = slots[i * 2];
+                newBracket.r32[i].team2 = slots[i * 2 + 1];
+            }
 
+            state.bracket = newBracket;
             saveState();
             renderBracket();
-            alert('Carta pertandingan telah di-reset dan disusun semula!');
+            alert('Carta Pertandingan 32 Slot telah di-reset & disusun semula!');
         }
 
         function loginAdmin() {
