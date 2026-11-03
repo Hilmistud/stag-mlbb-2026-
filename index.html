@@ -9,7 +9,6 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        /* Smooth Breathing RGB Color Shift Animation */
         @keyframes rgbBreathing {
             0% {
                 border-color: rgba(6, 182, 212, 0.8);
@@ -29,13 +28,11 @@
             }
         }
 
-        /* Pulsing Glow Text Effect */
         @keyframes textGlow {
             0%, 100% { text-shadow: 0 0 10px rgba(6, 182, 212, 0.8); }
             50% { text-shadow: 0 0 20px rgba(245, 158, 11, 0.9), 0 0 30px rgba(245, 158, 11, 0.6); }
         }
 
-        /* Moving Gradient Dynamic Background */
         @keyframes gradientMove {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
@@ -53,7 +50,6 @@
             background-size: 100% 100%, 32px 32px, 32px 32px;
         }
 
-        /* RGB Breathing Borders and Cards */
         .rgb-breathing-box {
             animation: rgbBreathing 6s infinite ease-in-out;
         }
@@ -62,7 +58,6 @@
             animation: rgbBreathing 8s infinite ease-in-out;
         }
 
-        /* Glowing Animated Buttons */
         .btn-neon-gold {
             background: linear-gradient(270deg, #F59E0B, #D97706, #FBBF24);
             background-size: 200% 200%;
@@ -89,24 +84,11 @@
             transform: translateY(-3px) scale(1.02);
             box-shadow: 0 0 35px rgba(6, 182, 212, 0.9);
         }
-        .btn-neon-cyan:active {
-            transform: translateY(0) scale(0.98);
-        }
-
-        .interactive-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .interactive-card:hover {
-            transform: translateY(-4px) scale(1.01);
-            border-color: rgba(6, 182, 212, 0.8);
-            box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
-        }
 
         .glow-title {
             animation: textGlow 5s infinite ease-in-out;
         }
 
-        /* Ultra Minimalist Bracket Cards */
         .mini-bracket-card {
             background: #0B1021;
             border: 1px solid rgba(6, 182, 212, 0.2);
@@ -121,7 +103,7 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between">
 
-    <!-- HEADER / NAVIGATION WITH RGB NEON LIGHTING -->
+    <!-- HEADER -->
     <header class="border-b border-cyan-500/30 bg-[#050811]/90 backdrop-blur sticky top-0 z-50 rgb-breathing-header">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('overview')">
@@ -154,7 +136,6 @@
             </div>
         </div>
 
-        <!-- Mobile Nav Menu -->
         <div id="mobile-menu" class="hidden lg:hidden border-b border-gray-800 bg-[#0B1021] px-4 py-3 space-y-2">
             <button onclick="switchTab('overview')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-gray-300 hover:bg-gray-800">Overview</button>
             <button onclick="switchTab('register')" class="w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-gray-300 hover:bg-gray-800">Register Squad</button>
@@ -165,7 +146,6 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT CONTAINER -->
     <main class="flex-grow">
         
         <!-- 1. OVERVIEW TAB -->
@@ -222,21 +202,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 p-4 rounded-2xl text-center">
-                    <span class="text-xs font-black text-cyan-400 uppercase tracking-wider block">COMPETE FOR GLORY</span>
-                </div>
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 p-4 rounded-2xl text-center">
-                    <span id="stat-hero-teams" class="text-xs font-black text-yellow-400 uppercase tracking-wider block">32 TEAMS 1 CHAMPION</span>
-                </div>
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 p-4 rounded-2xl text-center">
-                    <span class="text-xs font-black text-cyan-400 uppercase tracking-wider block">5V5 DRAFT PICK</span>
-                </div>
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 p-4 rounded-2xl text-center">
-                    <span class="text-xs font-black text-emerald-400 uppercase tracking-wider block">ATTRACTIVE PRIZES</span>
-                </div>
-            </div>
         </div>
 
         <!-- 2. REGISTER TAB -->
@@ -244,18 +209,17 @@
             <div class="text-center space-y-2">
                 <h2 class="text-3xl font-extrabold text-white glow-title">BORANG PENDAFTARAN SKUAD</h2>
                 <p class="text-xs text-yellow-400 font-bold uppercase tracking-wider">Tarikh Tutup Pendaftaran: 10 November 2026</p>
-                <p class="text-xs text-gray-400">Sila isi maklumat pasukan anda. Pemain 1-5 adalah wajib, Pemain 6 (Simpanan) adalah opsional.</p>
             </div>
 
             <form id="form-registration" class="rgb-breathing-box bg-[#0B1021] rounded-3xl p-6 space-y-6 border-2">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-xs font-bold text-gray-300 mb-2">Nama Skuad *</label>
-                        <input type="text" id="reg-team-name" required placeholder="Cth: EVOS SG" class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <input type="text" id="reg-team-name" required placeholder="Cth: EVOS SG" class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
                     </div>
                     <div>
                         <label class="block text-xs font-bold text-gray-300 mb-2">Kategori (Tahun) *</label>
-                        <select id="reg-category" required class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <select id="reg-category" required class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
                             <option value="Tahun 1">Tahun 1</option>
                             <option value="Tahun 2">Tahun 2</option>
                             <option value="Tahun 3">Tahun 3</option>
@@ -266,20 +230,15 @@
                         </select>
                     </div>
                 </div>
-
                 <div>
                     <label class="block text-xs font-bold text-gray-300 mb-2">Nombor WhatsApp Ketua Skuad *</label>
-                    <input type="text" id="reg-contact" required placeholder="Cth: 0123456789" class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-400">
+                    <input type="text" id="reg-contact" required placeholder="Cth: 0123456789" class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none">
                 </div>
-
                 <div class="space-y-3">
-                    <label class="block text-xs font-bold text-gray-300">Senarai Roster Pemain (Nama & Game ID)</label>
+                    <label class="block text-xs font-bold text-gray-300">Senarai Roster Pemain</label>
                     <div id="roster-inputs-container" class="space-y-3"></div>
                 </div>
-
-                <button type="submit" id="btn-submit-form" class="btn-neon-gold w-full py-3.5 text-black font-extrabold rounded-xl text-sm uppercase tracking-wider">
-                    Hantar Pendaftaran Skuad
-                </button>
+                <button type="submit" id="btn-submit-form" class="btn-neon-gold w-full py-3.5 text-black font-extrabold rounded-xl text-sm uppercase">Hantar Pendaftaran Skuad</button>
             </form>
         </div>
 
@@ -288,11 +247,10 @@
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-800 pb-6">
                 <div>
                     <h2 class="text-2xl font-black text-white glow-title">SENARAI PASUKAN BERDAFTAR</h2>
-                    <p class="text-xs text-gray-400">Senarai skuad yang disahkan menyertai STAG MLBB 2026.</p>
                 </div>
                 <div class="flex gap-2 w-full sm:w-auto">
-                    <input type="text" id="search-team-input" oninput="filterTeams()" placeholder="Cari nama skuad..." class="bg-[#0B1021] border border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400 w-full sm:w-48">
-                    <select id="filter-category-select" onchange="filterTeams()" class="bg-[#0B1021] border border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400">
+                    <input type="text" id="search-team-input" oninput="filterTeams()" placeholder="Cari nama skuad..." class="bg-[#0B1021] border border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-white">
+                    <select id="filter-category-select" onchange="filterTeams()" class="bg-[#0B1021] border border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-white">
                         <option value="ALL">Semua Kategori</option>
                         <option value="Tahun 1">Tahun 1</option>
                         <option value="Tahun 2">Tahun 2</option>
@@ -304,244 +262,100 @@
                     </select>
                 </div>
             </div>
-
             <div id="teams-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
         </div>
 
-        <!-- 4. RULES, PRIZES & MVP SECTION -->
+        <!-- 4. RULES TAB -->
         <div id="tab-rules" class="tab-content hidden max-w-6xl mx-auto px-4 py-8">
             <div class="text-center mb-8">
-                <p class="text-xs font-bold uppercase tracking-widest text-yellow-400 mb-2">OFFICIAL RULEBOOK • STAG MLBB 2026 • 32 TEAMS</p>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-3 glow-title">RULES, PRIZES & MVP HONOURS</h2>
-                <p class="text-gray-400 text-sm max-w-2xl mx-auto">Standard competitive Mobile Legends: Bang Bang guidelines enforced at Sekolah Rendah Kebangsaan Taman Gembira on 14/11/2026.</p>
+                <h2 class="text-3xl font-extrabold text-white mb-3 glow-title">RULES & PRIZES</h2>
             </div>
-
-            <div class="flex justify-center mb-8">
-                <div class="bg-[#0B1021] p-1.5 rounded-2xl border border-cyan-500/40 inline-flex flex-wrap gap-1">
-                    <button onclick="switchRuleTab('format')" id="ruletab-format" class="rule-subtab-btn btn-neon-gold px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-black">32-Team Format</button>
-                    <button onclick="switchRuleTab('prizes')" id="ruletab-prizes" class="rule-subtab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-400 hover:text-white">Prizes & MVP</button>
-                    <button onclick="switchRuleTab('timeline')" id="ruletab-timeline" class="rule-subtab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-400 hover:text-white">Timeline & Dates</button>
-                    <button onclick="switchRuleTab('device')" id="ruletab-device" class="rule-subtab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-gray-400 hover:text-white">Device & Fair Play</button>
+            <div id="rulecontent-format" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-2">5V5 DRAFT PICK</h3>
+                    <p class="text-xs text-gray-400">Custom Mode Tournament Draft Pick (5 Bans per team).</p>
                 </div>
-            </div>
-
-            <div id="rulecontent-format" class="rule-subcontent grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-4">
-                            <i data-lucide="swords" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-3">5V5 CUSTOM DRAFT PICK</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">All matches will be conducted in Mobile Legends: Bang Bang Custom Mode: Tournament Draft Pick (5 Bans per team). All heroes released on the live server up to 7 days before the event are allowed.</p>
-                    </div>
-                    <div class="border-t border-gray-800/80 pt-4 text-xs">
-                        <span class="text-yellow-400 font-bold">Skin Effects:</span> <span class="text-gray-400">Allowed (Customary tournament skins or standard).</span>
-                    </div>
+                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-2">32 SQUAD KNOCKOUT</h3>
+                    <p class="text-xs text-gray-400">Single elimination knockout stage.</p>
                 </div>
-
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4">
-                            <i data-lucide="trophy" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-3">32 TEAMS KNOCKOUT</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">The tournament hosts strictly 32 registered squads in a single elimination championship tree: Round of 32 (16 matches), Round of 16 (8 matches), Quarter-Finals, Semi-Finals, and Grand Finals.</p>
-                    </div>
-                    <div class="border-t border-gray-800/80 pt-4 text-xs">
-                        <span class="text-cyan-400 font-bold">Match Length:</span> <span class="text-gray-400">Best of 1 (Rounds 1-3), Best of 3 (Semis & Finals).</span>
-                    </div>
-                </div>
-
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 flex flex-col justify-between">
-                    <div>
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
-                            <i data-lucide="map-pin" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-white mb-3">PHYSICAL LAN STAGE</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed mb-4">Held live on-site at Sekolah Rendah Kebangsaan Taman Gembira. Teams must check in physically with their registered squad members matching their verified MLBB Game IDs.</p>
-                    </div>
-                    <div class="border-t border-gray-800/80 pt-4 text-xs">
-                        <span class="text-emerald-400 font-bold">Spectators:</span> <span class="text-gray-400">Open to students, parents, and school supporters.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="rulecontent-prizes" class="rule-subcontent hidden space-y-6">
-                <div class="bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div>
-                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">ENTRY FEE POLICY</span>
-                        <h4 class="text-base font-bold text-white">Registration Fee: RM 50.00 Per Squad</h4>
-                        <p class="text-xs text-gray-400">Payment confirms your starting slot in the 32-team bracket. Payment window closes on 10 November 2026.</p>
-                    </div>
-                    <div class="bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2 text-right">
-                        <span class="text-[9px] text-gray-400 uppercase block font-bold">TOTAL TEAM FEE</span>
-                        <span class="text-lg font-extrabold text-emerald-400">RM 50</span>
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="interactive-card bg-[#0B1021] border border-yellow-500/60 rounded-2xl p-6 relative">
-                        <span class="absolute top-4 right-4 px-2.5 py-1 bg-yellow-500 text-black font-extrabold text-[10px] rounded-md uppercase">1st Champion</span>
-                        <div class="w-10 h-10 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center mb-4">
-                            <i data-lucide="trophy" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-xl font-extrabold text-white mb-1">GRAND CHAMPION</h3>
-                        <p class="text-xs text-yellow-400 font-bold uppercase">GRAND CHAMPIONSHIP CUP & GOLD MEDALS</p>
-                    </div>
-
-                    <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 relative">
-                        <span class="absolute top-4 right-4 px-2.5 py-1 bg-cyan-950 text-cyan-400 border border-cyan-800 font-extrabold text-[10px] rounded-md uppercase">2nd Runner Up</span>
-                        <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4">
-                            <i data-lucide="medal" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-xl font-extrabold text-white mb-1">1ST RUNNER UP</h3>
-                        <p class="text-xs text-gray-400 font-bold uppercase">RUNNER-UP TROPHY & SILVER MEDALS</p>
-                    </div>
-
-                    <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 relative">
-                        <span class="absolute top-4 right-4 px-2.5 py-1 bg-amber-950 text-amber-500 border border-amber-800 font-extrabold text-[10px] rounded-md uppercase">3rd Place</span>
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4">
-                            <i data-lucide="award" class="w-5 h-5"></i>
-                        </div>
-                        <h3 class="text-xl font-extrabold text-white mb-1">2ND RUNNER UP</h3>
-                        <p class="text-xs text-amber-500 font-bold uppercase">THIRD PLACE TROPHY & BRONZE MEDALS</p>
-                    </div>
-                </div>
-
-                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                    <div>
-                        <div class="flex items-center gap-2 mb-2">
-                            <div class="w-8 h-8 rounded-lg bg-yellow-500/20 text-yellow-400 flex items-center justify-center">
-                                <i data-lucide="crown" class="w-4 h-4"></i>
-                            </div>
-                            <span class="text-[10px] font-bold text-yellow-400 border border-yellow-500/30 bg-yellow-950/40 px-2 py-0.5 rounded-full uppercase">PRESTIGE INDIVIDUAL HONOUR</span>
-                        </div>
-                        <h3 class="text-xl font-extrabold text-white mb-2">TOURNAMENT MVP (MOST VALUABLE PLAYER)</h3>
-                        <p class="text-xs text-gray-400 max-w-2xl">Awarded to the overall top-performing player across the tournament bracket and Grand Finals. Evaluated by official referees and casters based on micro-mechanics, KDA, decisive team-fight execution, and leadership.</p>
-                    </div>
-                    <div class="bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-3 text-right whitespace-nowrap">
-                        <span class="text-[9px] text-gray-400 uppercase block font-bold">AWARD TYPE</span>
-                        <span class="text-sm font-extrabold text-yellow-400">Official MVP Trophy & Plaque</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="rulecontent-timeline" class="rule-subcontent hidden bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6 space-y-4">
-                <h3 class="text-lg font-bold text-white mb-4">TOURNAMENT SCHEDULE</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                    <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
-                        <span class="text-cyan-400 font-bold block mb-1">01 NOV - 10 NOV 2026</span>
-                        <span class="text-white font-bold text-sm block">Squad Registration</span>
-                        <p class="text-gray-400 mt-1">Open for 32 team slots. Last registration on 10/11/2026.</p>
-                    </div>
-                    <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
-                        <span class="text-yellow-400 font-bold block mb-1">12 NOV 2026</span>
-                        <span class="text-white font-bold text-sm block">Bracket Draw & Briefing</span>
-                        <p class="text-gray-400 mt-1">Official random seeding draw live broadcast for team captains.</p>
-                    </div>
-                    <div class="p-4 bg-[#050811] rounded-xl border border-cyan-500/40">
-                        <span class="text-emerald-400 font-bold block mb-1">14 NOV 2026</span>
-                        <span class="text-white font-bold text-sm block">Tournament Matchday</span>
-                        <p class="text-gray-400 mt-1">On-site LAN matches start at 9:00 AM.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="rulecontent-device" class="rule-subcontent hidden grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-8 h-8 rounded-lg bg-yellow-500/10 text-yellow-400 flex items-center justify-center">
-                            <i data-lucide="smartphone" class="w-4 h-4"></i>
-                        </div>
-                        <h3 class="text-base font-extrabold text-white uppercase tracking-wide">DEVICE & HARDWARE RULES</h3>
-                    </div>
-                    <ul class="space-y-4 text-xs">
-                        <li class="flex items-start gap-2">
-                            <span class="text-yellow-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Smartphones Only:</strong> <span class="text-gray-400">iPads, tablets, emulators (BlueStacks/LDPlayer), and PCs are strictly banned.</span></div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-yellow-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Power & Battery:</strong> <span class="text-gray-400">Players must bring personal portable power banks and original charging cables.</span></div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-yellow-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Audio:</strong> <span class="text-gray-400">Wired or Bluetooth earphones/headphones are mandatory during matches to prevent sound spill.</span></div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-yellow-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Network:</strong> <span class="text-gray-400">Dedicated tournament Wi-Fi is provided, but players are advised to have 4G/5G mobile data backup.</span></div>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-8 h-8 rounded-lg bg-red-500/10 text-red-400 flex items-center justify-center">
-                            <i data-lucide="shield-alert" class="w-4 h-4"></i>
-                        </div>
-                        <h3 class="text-base font-extrabold text-white uppercase tracking-wide">FAIR PLAY & DISCIPLINARY CODE</h3>
-                    </div>
-                    <ul class="space-y-4 text-xs">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Anti-Cheat / Scripting:</strong> <span class="text-gray-400">Any map-hacks, macro scripts, or modified APKs will result in immediate squad disqualification and ban.</span></div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Roster Identity Match:</strong> <span class="text-gray-400">Players must play strictly on the MLBB Game ID declared in their registration pass. "Joki" (account pilot) is strictly forbidden.</span></div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Sportsmanship:</strong> <span class="text-gray-400">Toxic chat, taunting, vulgarity, or unsportsmanlike behavior will incur penalty warnings or match forfeit.</span></div>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5">•</span>
-                            <div><strong class="text-white">Referee Discretion:</strong> <span class="text-gray-400">All in-game pause requests and match dispute determinations by official referees are final.</span></div>
-                        </li>
-                    </ul>
+                <div class="interactive-card bg-[#0B1021] border border-cyan-500/30 rounded-2xl p-6">
+                    <h3 class="text-lg font-bold text-white mb-2">PHYSICAL LAN</h3>
+                    <p class="text-xs text-gray-400">On-site at SRK Taman Gembira on 14/11/2026.</p>
                 </div>
             </div>
         </div>
 
-        <!-- 5. MINIMALIST BRACKETS TAB -->
+        <!-- 5. SPLIT CENTER BRACKET TREE (LEFT vs RIGHT) -->
         <div id="tab-brackets" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 space-y-6">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <div>
-                    <h2 class="text-2xl font-black text-white glow-title">CARTA KEJOHANAN</h2>
-                    <p class="text-xs text-gray-400">Peringkat Kalah Mati 32 Pasukan</p>
-                </div>
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-black text-white glow-title">CARTA KEJOHANAN (SPLIT TREE)</h2>
+                <p class="text-xs text-gray-400">Blok Kiri vs Blok Kanan Mara ke Grand Finals</p>
             </div>
 
-            <!-- Champion Banner -->
-            <div id="champion-box" class="hidden bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-4 text-center">
+            <div id="champion-box" class="hidden bg-yellow-500/10 border border-yellow-500/30 rounded-2xl p-4 text-center max-w-md mx-auto mb-6">
                 <span class="text-[10px] font-bold text-yellow-400 uppercase tracking-widest">JUARA STAG MLBB 2026</span>
                 <h3 id="champion-team-name" class="text-2xl font-black text-yellow-400 mt-1">-</h3>
             </div>
 
-            <!-- Minimalist Columns Structure -->
+            <!-- 7-Column Split Bracket Container -->
             <div class="overflow-x-auto pb-6">
-                <div class="min-w-[1050px] grid grid-cols-5 gap-3">
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-400 mb-3 text-center uppercase tracking-wider">Round of 32</div>
-                        <div id="bracket-r32-container" class="space-y-2"></div>
+                <div class="min-w-[1250px] grid grid-cols-7 gap-3 items-center">
+                    
+                    <!-- Col 1: Left R32 (Matches 1-8) -->
+                    <div class="space-y-2">
+                        <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R32 (Kiri)</div>
+                        <div id="bracket-left-r32" class="space-y-2"></div>
                     </div>
-                    <div>
-                        <div class="text-[11px] font-bold text-gray-400 mb-3 text-center uppercase tracking-wider">Round of 16</div>
-                        <div id="bracket-r16-container" class="space-y-6 pt-3"></div>
+
+                    <!-- Col 2: Left R16 (Matches 1-4) -->
+                    <div class="space-y-4 pt-3">
+                        <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R16</div>
+                        <div id="bracket-left-r16" class="space-y-6"></div>
                     </div>
-                    <div>
-                        <div class="text-[11px] font-bold text-cyan-400 mb-3 text-center uppercase tracking-wider">Suku Akhir</div>
-                        <div id="bracket-qf-container" class="space-y-14 pt-6"></div>
+
+                    <!-- Col 3: Left QF (Matches 1-2) -->
+                    <div class="space-y-8 pt-6">
+                        <div class="text-[10px] font-bold text-cyan-400 text-center uppercase">Suku Akhir</div>
+                        <div id="bracket-left-qf" class="space-y-14"></div>
                     </div>
-                    <div>
-                        <div class="text-[11px] font-bold text-cyan-400 mb-3 text-center uppercase tracking-wider">Semi-Finals</div>
-                        <div id="bracket-sf-container" class="space-y-28 pt-12"></div>
+
+                    <!-- Col 4: CENTER FINALS (Left SF vs Right SF) -->
+                    <div class="space-y-6 text-center">
+                        <div>
+                            <div class="text-[10px] font-bold text-cyan-400 mb-1 uppercase">Semi-Final 1</div>
+                            <div id="bracket-sf-left"></div>
+                        </div>
+
+                        <div class="p-3 bg-yellow-500/10 border border-yellow-500/50 rounded-xl my-4">
+                            <div class="text-[11px] font-black text-yellow-400 uppercase mb-2">🏆 GRAND FINALS</div>
+                            <div id="bracket-final-match"></div>
+                        </div>
+
+                        <div>
+                            <div class="text-[10px] font-bold text-cyan-400 mb-1 uppercase">Semi-Final 2</div>
+                            <div id="bracket-sf-right"></div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="text-[11px] font-bold text-yellow-400 mb-3 text-center uppercase tracking-wider">Grand Finals</div>
-                        <div id="bracket-final-container" class="pt-24"></div>
+
+                    <!-- Col 5: Right QF (Matches 3-4) -->
+                    <div class="space-y-8 pt-6">
+                        <div class="text-[10px] font-bold text-cyan-400 text-center uppercase">Suku Akhir</div>
+                        <div id="bracket-right-qf" class="space-y-14"></div>
                     </div>
+
+                    <!-- Col 6: Right R16 (Matches 5-8) -->
+                    <div class="space-y-4 pt-3">
+                        <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R16</div>
+                        <div id="bracket-right-r16" class="space-y-6"></div>
+                    </div>
+
+                    <!-- Col 7: Right R32 (Matches 9-16) -->
+                    <div class="space-y-2">
+                        <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R32 (Kanan)</div>
+                        <div id="bracket-right-r32" class="space-y-2"></div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -550,27 +364,25 @@
         <div id="tab-admin" class="tab-content hidden max-w-5xl mx-auto px-4 py-8 space-y-6">
             <div id="admin-login-card" class="max-w-md mx-auto rgb-breathing-box bg-[#0B1021] rounded-3xl p-6 text-center space-y-4 border-2">
                 <h3 class="text-xl font-bold text-white">Log Masuk Admin</h3>
-                <input type="password" id="admin-pass-input" placeholder="Masukkan kata laluan admin..." class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-yellow-400">
+                <input type="password" id="admin-pass-input" placeholder="Kata laluan..." class="w-full bg-[#050811] border border-cyan-500/40 rounded-xl px-4 py-2.5 text-sm text-white">
                 <button onclick="loginAdmin()" class="btn-neon-gold w-full py-2.5 text-black font-extrabold rounded-xl text-sm uppercase">Log Masuk</button>
             </div>
 
             <div id="admin-dashboard" class="hidden space-y-6">
                 <div class="flex justify-between items-center bg-[#0B1021] p-4 rounded-2xl border border-cyan-500/40">
                     <div>
-                        <h3 class="text-lg font-bold text-white">Dashboard Pengurusan Admin</h3>
+                        <h3 class="text-lg font-bold text-white">Dashboard Admin</h3>
                         <p class="text-xs text-gray-400">Jumlah Pasukan: <span id="admin-team-count" class="text-yellow-400 font-bold">0</span> / 32</p>
                     </div>
                     <div class="flex gap-2">
                         <button onclick="generateRandomBracket()" class="btn-neon-cyan px-3 py-2 text-white rounded-xl text-xs font-bold">Auto Bracket 32</button>
-                        <button onclick="exportTeamsCSV()" class="px-3 py-2 bg-gray-800 text-white rounded-xl text-xs font-bold hover:bg-gray-700 border border-gray-700">Export CSV</button>
-                        <button onclick="logoutAdmin()" class="px-3 py-2 bg-red-950 text-red-400 border border-red-800 rounded-xl text-xs font-bold hover:bg-red-900">Log Keluar</button>
+                        <button onclick="logoutAdmin()" class="px-3 py-2 bg-red-950 text-red-400 border border-red-800 rounded-xl text-xs font-bold">Log Keluar</button>
                     </div>
                 </div>
 
-                <!-- Teams Table -->
                 <div class="bg-[#0B1021] border border-cyan-500/40 rounded-2xl overflow-x-auto">
                     <table class="w-full text-left text-sm text-gray-300">
-                        <thead class="bg-[#050811] text-xs uppercase text-gray-400 border-b border-gray-800">
+                        <thead class="bg-[#050811] text-xs uppercase text-gray-400">
                             <tr>
                                 <th class="px-6 py-3">#</th>
                                 <th class="px-6 py-3">Nama Skuad</th>
@@ -584,10 +396,8 @@
                     </table>
                 </div>
 
-                <!-- Interactive Match Bracket Manager -->
                 <div class="bg-[#0B1021] border border-yellow-500/40 rounded-2xl p-6 space-y-4">
-                    <h4 class="text-base font-bold text-yellow-400 uppercase tracking-wide">Pengurusan Keputusan Perlawanan (Kemaraan ke Suku Akhir & Final)</h4>
-                    <p class="text-xs text-gray-400">Pilih Pemenang bagi setiap perlawanan. Pasukan yang menang akan **secara automatik mara** ke Round of 16, Suku Akhir (Quarter-Finals), Semi-Final, dan Grand Finals!</p>
+                    <h4 class="text-base font-bold text-yellow-400 uppercase">Pengurusan Keputusan Match</h4>
                     <div id="admin-bracket-manager" class="space-y-6"></div>
                 </div>
             </div>
@@ -609,17 +419,15 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer class="border-t border-cyan-500/30 bg-[#050811] py-6 text-center text-xs text-gray-500">
         <p>© 2026 STAG MLBB Tournament - SRK Taman Gembira.</p>
     </footer>
 
-    <!-- Firebase Compat SDKs (App & Realtime Database) -->
+    <!-- Firebase Compat SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
     <script>
-        // FIREBASE CREDENTIALS
         const firebaseConfig = {
             apiKey: "AIzaSyCgiyl-ZX5dNenyaA4nFV7-6mvZFBxXAdJM",
             authDomain: "mlbb-2026-1535b.firebaseapp.com",
@@ -630,17 +438,10 @@
             appId: "1:923897468114:web:d256d850846431195ce90b"
         };
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
+        if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        let state = {
-            teams: [],
-            bracket: null,
-            targetDate: '2026-11-10T23:59:59',
-            isAdminLoggedIn: false
-        };
+        let state = { teams: [], bracket: null, targetDate: '2026-11-10T23:59:59', isAdminLoggedIn: false };
 
         window.addEventListener('DOMContentLoaded', function() {
             try { lucide.createIcons(); } catch(e){}
@@ -648,29 +449,20 @@
             startCountdown();
             listenToCloudData();
             setupFormListener();
-
-            if (window.location.hash === '#admin') {
-                switchTab('admin');
-            }
         });
 
         function listenToCloudData() {
             db.ref('teams').on('value', (snapshot) => {
                 const data = snapshot.val();
-                if (data) {
-                    state.teams = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-                } else {
-                    state.teams = [];
-                }
+                state.teams = data ? Object.keys(data).map(k => ({ id: k, ...data[k] })) : [];
                 renderRegisteredTeams();
-                updateStatsCounters();
                 if (state.isAdminLoggedIn) renderAdminTable();
             });
 
             db.ref('bracket').on('value', (snapshot) => {
                 const data = snapshot.val();
                 state.bracket = data ? data : createInitial32Bracket();
-                renderBracket();
+                renderSplitBracket();
                 if (state.isAdminLoggedIn) renderAdminBracketManager();
             });
         }
@@ -691,37 +483,17 @@
 
             const activeNav = document.getElementById('nav-' + tabId);
             if (activeNav) {
-                if (tabId === 'admin') {
-                    activeNav.className = "nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-yellow-400 bg-yellow-950/70 border border-yellow-500/60 shadow-[0_0_10px_rgba(245,158,11,0.3)]";
-                } else {
-                    activeNav.className = "nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-cyan-400 bg-cyan-950/70 border border-cyan-500/60 shadow-[0_0_10px_rgba(6,182,212,0.3)]";
-                }
+                activeNav.className = tabId === 'admin' ? 
+                    "nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-yellow-400 bg-yellow-950/70 border border-yellow-500/60" : 
+                    "nav-btn px-4 py-2 rounded-xl text-xs font-bold transition text-cyan-400 bg-cyan-950/70 border border-cyan-500/60";
             }
-
-            const mobileMenu = document.getElementById('mobile-menu');
-            if (mobileMenu) mobileMenu.classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function switchRuleTab(subTab) {
-            document.querySelectorAll('.rule-subcontent').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.rule-subtab-btn').forEach(btn => {
-                btn.className = "rule-subtab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition text-gray-400 hover:text-white";
-            });
-
-            const targetContent = document.getElementById('rulecontent-' + subTab);
-            const targetBtn = document.getElementById('ruletab-' + subTab);
-            if (targetContent) targetContent.classList.remove('hidden');
-            if (targetBtn) {
-                targetBtn.className = "rule-subtab-btn btn-neon-gold px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-black";
-            }
         }
 
         function renderRosterInputs() {
             const container = document.getElementById('roster-inputs-container');
             if (!container) return;
             container.innerHTML = '';
-
             for (let i = 1; i <= 6; i++) {
                 const isSub = i === 6;
                 const row = document.createElement('div');
@@ -729,10 +501,10 @@
                 row.innerHTML = `
                     <div class="flex items-center gap-2">
                         <span class="w-6 h-6 rounded-full ${isSub ? 'bg-yellow-500/20 text-yellow-400' : 'bg-cyan-500/20 text-cyan-400'} flex items-center justify-center text-xs font-bold">${i}</span>
-                        <input type="text" id="p${i}-name" ${isSub ? '' : 'required'} placeholder="Pemain ${i} ${isSub ? '(Simpanan - Opsional)' : '(Utama *)'}" class="w-full bg-[#0B1021] border border-cyan-500/40 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <input type="text" id="p${i}-name" ${isSub ? '' : 'required'} placeholder="Pemain ${i} ${isSub ? '(Simpanan)' : '*'}" class="w-full bg-[#0B1021] border border-cyan-500/40 rounded-lg px-3 py-2 text-sm text-white">
                     </div>
                     <div>
-                        <input type="text" id="p${i}-id" ${isSub ? '' : 'required'} placeholder="Game ID ${isSub ? '(Opsional)' : '*'}" class="w-full bg-[#0B1021] border border-cyan-500/40 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-400">
+                        <input type="text" id="p${i}-id" ${isSub ? '' : 'required'} placeholder="Game ID ${isSub ? '(Opsional)' : '*'}" class="w-full bg-[#0B1021] border border-cyan-500/40 rounded-lg px-3 py-2 text-sm text-white">
                     </div>
                 `;
                 container.appendChild(row);
@@ -745,11 +517,7 @@
 
             regForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
-                if (state.teams.length >= 32) {
-                    alert('Pendaftaran penuh! Maksimum 32 Skuad.');
-                    return;
-                }
+                if (state.teams.length >= 32) return alert('Pendaftaran penuh! Maksimum 32 Skuad.');
 
                 const name = document.getElementById('reg-team-name').value.trim();
                 const category = document.getElementById('reg-category').value;
@@ -757,47 +525,15 @@
 
                 const players = [];
                 for (let i = 1; i <= 6; i++) {
-                    const pNameInput = document.getElementById(`p${i}-name`);
-                    const pIdInput = document.getElementById(`p${i}-id`);
-                    const pName = pNameInput ? pNameInput.value.trim() : '';
-                    const pId = pIdInput ? pIdInput.value.trim() : '';
-                    if (pName || pId) {
-                        players.push({ name: pName || `Pemain ${i}`, gameId: pId || '-' });
-                    }
+                    const pName = document.getElementById(`p${i}-name`)?.value.trim() || '';
+                    const pId = document.getElementById(`p${i}-id`)?.value.trim() || '';
+                    if (pName || pId) players.push({ name: pName || `Pemain ${i}`, gameId: pId || '-' });
                 }
 
                 const teamId = 'team_' + Date.now();
-                const newTeam = {
-                    id: teamId,
-                    name: name,
-                    category: category,
-                    contact: contact,
-                    status: 'MENUNGGU',
-                    timestamp: new Date().toISOString().slice(0, 16).replace('T', ' '),
-                    players: players
-                };
-
-                const submitBtn = document.getElementById('btn-submit-form');
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                    submitBtn.innerText = 'MEMPROSES...';
-                }
-
-                db.ref('teams/' + teamId).set(newTeam)
-                    .then(() => {
-                        alert(`Skuad ${name} Berjaya Didaftarkan! Data telah diselaraskan ke semua peranti.`);
-                        regForm.reset();
-                        switchTab('teams');
-                    })
-                    .catch((error) => {
-                        alert('Ralat menyimpan data: ' + error.message);
-                    })
-                    .finally(() => {
-                        if (submitBtn) {
-                            submitBtn.disabled = false;
-                            submitBtn.innerText = 'HANTAR PENDAFTARAN SKUAD';
-                        }
-                    });
+                db.ref('teams/' + teamId).set({ id: teamId, name, category, contact, status: 'MENUNGGU', timestamp: new Date().toISOString(), players })
+                    .then(() => { alert(`Skuad ${name} Berjaya Didaftarkan!`); regForm.reset(); switchTab('teams'); })
+                    .catch((err) => alert('Ralat: ' + err.message));
             });
         }
 
@@ -808,11 +544,7 @@
             const catVal = document.getElementById('filter-category-select')?.value || 'ALL';
 
             container.innerHTML = '';
-            const filtered = state.teams.filter(t => {
-                const matchesCat = (catVal === 'ALL' || t.category === catVal);
-                const matchesSearch = (t.name || '').toLowerCase().includes(searchVal);
-                return matchesCat && matchesSearch;
-            });
+            const filtered = state.teams.filter(t => (catVal === 'ALL' || t.category === catVal) && (t.name || '').toLowerCase().includes(searchVal));
 
             if (filtered.length === 0) {
                 container.innerHTML = `<div class="col-span-full text-center py-12 text-gray-500">Tiada skuad ditemui.</div>`;
@@ -841,61 +573,57 @@
             document.getElementById('modal-roster-category').innerText = team.category;
             const container = document.getElementById('modal-roster-players-list');
             container.innerHTML = '';
-
             (team.players || []).forEach((p, idx) => {
                 const item = document.createElement('div');
                 item.className = "p-3 rounded-xl border border-cyan-500/30 bg-[#050811] flex justify-between text-xs text-gray-300";
                 item.innerHTML = `<span>${idx + 1}. ${p.name} ${idx === 5 ? '(Simpanan)' : ''}</span><span class="font-mono text-gray-400">${p.gameId}</span>`;
                 container.appendChild(item);
             });
-
             document.getElementById('roster-modal').classList.remove('hidden');
         }
 
         function closeRosterModal() { document.getElementById('roster-modal').classList.add('hidden'); }
 
         function createInitial32Bracket() {
-            const r32 = [];
-            for (let i = 1; i <= 16; i++) {
-                r32.push({ id: `r32_${i}`, team1: `Skuad ${i*2 - 1}`, score1: 0, team2: `Skuad ${i*2}`, score2: 0, winner: null });
-            }
-            const r16 = [];
-            for (let i = 1; i <= 8; i++) {
-                r16.push({ id: `r16_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
-            }
-            const qf = [];
-            for (let i = 1; i <= 4; i++) {
-                qf.push({ id: `qf_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
-            }
-            const sf = [
-                { id: 'sf_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null },
-                { id: 'sf_2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
-            ];
-            const final = [
-                { id: 'fn_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }
-            ];
+            const r32 = []; for (let i = 1; i <= 16; i++) r32.push({ id: `r32_${i}`, team1: `Skuad ${i*2 - 1}`, score1: 0, team2: `Skuad ${i*2}`, score2: 0, winner: null });
+            const r16 = []; for (let i = 1; i <= 8; i++) r16.push({ id: `r16_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
+            const qf = []; for (let i = 1; i <= 4; i++) qf.push({ id: `qf_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
+            const sf = [{ id: 'sf_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }, { id: 'sf_2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }];
+            const final = [{ id: 'fn_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }];
             return { r32, r16, qf, sf, final };
         }
 
-        function renderBracket() {
-            const r32Container = document.getElementById('bracket-r32-container');
-            const r16Container = document.getElementById('bracket-r16-container');
-            const qfContainer = document.getElementById('bracket-qf-container');
-            const sfContainer = document.getElementById('bracket-sf-container');
-            const fnContainer = document.getElementById('bracket-final-container');
-            if (!r32Container) return;
-
-            r32Container.innerHTML = ''; r16Container.innerHTML = ''; qfContainer.innerHTML = ''; sfContainer.innerHTML = ''; fnContainer.innerHTML = '';
-
+        // RENDER SPLIT LEFT-RIGHT BRACKET
+        function renderSplitBracket() {
             if (!state.bracket || !state.bracket.r32) state.bracket = createInitial32Bracket();
+            const b = state.bracket;
 
-            state.bracket.r32.forEach(m => r32Container.appendChild(createMinimalistMatchCard(m)));
-            state.bracket.r16.forEach(m => r16Container.appendChild(createMinimalistMatchCard(m)));
-            state.bracket.qf.forEach(m => qfContainer.appendChild(createMinimalistMatchCard(m)));
-            state.bracket.sf.forEach(m => sfContainer.appendChild(createMinimalistMatchCard(m)));
-            state.bracket.final.forEach(m => fnContainer.appendChild(createMinimalistMatchCard(m)));
+            const renderCol = (elementId, matches) => {
+                const c = document.getElementById(elementId);
+                if (!c) return;
+                c.innerHTML = '';
+                matches.forEach(m => c.appendChild(createMiniCard(m)));
+            };
 
-            const champ = state.bracket.final[0]?.winner;
+            // Left Wing
+            renderCol('bracket-left-r32', b.r32.slice(0, 8));
+            renderCol('bracket-left-r16', b.r16.slice(0, 4));
+            renderCol('bracket-left-qf', b.qf.slice(0, 2));
+
+            // Right Wing
+            renderCol('bracket-right-r32', b.r32.slice(8, 16));
+            renderCol('bracket-right-r16', b.r16.slice(4, 8));
+            renderCol('bracket-right-qf', b.qf.slice(2, 4));
+
+            // Center Finals
+            const sfLeft = document.getElementById('bracket-sf-left');
+            const sfRight = document.getElementById('bracket-sf-right');
+            const finalMatch = document.getElementById('bracket-final-match');
+            if (sfLeft) { sfLeft.innerHTML = ''; sfLeft.appendChild(createMiniCard(b.sf[0])); }
+            if (sfRight) { sfRight.innerHTML = ''; sfRight.appendChild(createMiniCard(b.sf[1])); }
+            if (finalMatch) { finalMatch.innerHTML = ''; finalMatch.appendChild(createMiniCard(b.final[0])); }
+
+            const champ = b.final[0]?.winner;
             const champBox = document.getElementById('champion-box');
             if (champ && champBox) {
                 champBox.classList.remove('hidden');
@@ -903,22 +631,20 @@
             }
         }
 
-        // MINIMALIST CARD CREATOR
-        function createMinimalistMatchCard(match) {
+        function createMiniCard(match) {
             const card = document.createElement('div');
-            card.className = "mini-bracket-card p-2 space-y-1 shadow-sm";
-            
-            const isWinner1 = match.winner && match.winner === match.team1;
-            const isWinner2 = match.winner && match.winner === match.team2;
+            card.className = "mini-bracket-card p-2 space-y-1 text-left";
+            const w1 = match.winner && match.winner === match.team1;
+            const w2 = match.winner && match.winner === match.team2;
 
             card.innerHTML = `
-                <div class="flex justify-between items-center px-2 py-1 rounded text-[11px] ${isWinner1 ? 'bg-emerald-950/60 font-black text-emerald-300 border border-emerald-500/40' : 'text-gray-300'}">
-                    <span class="truncate max-w-[120px]">${isWinner1 ? '✓ ' : ''}${match.team1 || 'TBD'}</span>
-                    <span class="font-mono ${isWinner1 ? 'text-emerald-400 font-bold' : 'text-gray-500'}">${match.score1 ?? 0}</span>
+                <div class="flex justify-between items-center px-2 py-1 rounded text-[11px] ${w1 ? 'bg-emerald-950/60 font-black text-emerald-300 border border-emerald-500/40' : 'text-gray-300'}">
+                    <span class="truncate max-w-[110px]">${w1 ? '✓ ' : ''}${match.team1 || 'TBD'}</span>
+                    <span class="font-mono ${w1 ? 'text-emerald-400 font-bold' : 'text-gray-500'}">${match.score1 ?? 0}</span>
                 </div>
-                <div class="flex justify-between items-center px-2 py-1 rounded text-[11px] ${isWinner2 ? 'bg-emerald-950/60 font-black text-emerald-300 border border-emerald-500/40' : 'text-gray-300'}">
-                    <span class="truncate max-w-[120px]">${isWinner2 ? '✓ ' : ''}${match.team2 || 'TBD'}</span>
-                    <span class="font-mono ${isWinner2 ? 'text-emerald-400 font-bold' : 'text-gray-500'}">${match.score2 ?? 0}</span>
+                <div class="flex justify-between items-center px-2 py-1 rounded text-[11px] ${w2 ? 'bg-emerald-950/60 font-black text-emerald-300 border border-emerald-500/40' : 'text-gray-300'}">
+                    <span class="truncate max-w-[110px]">${w2 ? '✓ ' : ''}${match.team2 || 'TBD'}</span>
+                    <span class="font-mono ${w2 ? 'text-emerald-400 font-bold' : 'text-gray-500'}">${match.score2 ?? 0}</span>
                 </div>
             `;
             return card;
@@ -928,15 +654,11 @@
             const approvedTeams = state.teams.filter(t => t.status === 'LULUS');
             const teamList = (approvedTeams.length >= 2 ? approvedTeams : state.teams).map(t => t.name);
 
-            if (teamList.length < 2) {
-                return alert('Sekurang-kurangnya 2 skuad diperlukan untuk menyusun bracket!');
-            }
+            if (teamList.length < 2) return alert('Sekurang-kurangnya 2 skuad diperlukan!');
 
             const shuffled = [...teamList].sort(() => 0.5 - Math.random());
             const slots = Array(32).fill('TBD');
-            for (let i = 0; i < shuffled.length && i < 32; i++) {
-                slots[i] = shuffled[i];
-            }
+            for (let i = 0; i < shuffled.length && i < 32; i++) slots[i] = shuffled[i];
 
             const newBracket = createInitial32Bracket();
             for (let i = 0; i < 16; i++) {
@@ -944,9 +666,7 @@
                 newBracket.r32[i].team2 = slots[i * 2 + 1];
             }
 
-            db.ref('bracket').set(newBracket, () => {
-                alert('Carta Pertandingan 32 Slot telah disegerakkan!');
-            });
+            db.ref('bracket').set(newBracket, () => alert('Carta Pertandingan Split 32 Slot telah disegerakkan!'));
         }
 
         function setMatchWinner(roundKey, matchIndex, winningTeam, score1, score2) {
@@ -972,7 +692,7 @@
             }
 
             db.ref('bracket').set(currentBracket)
-                .then(() => alert(`Pemenang perlawanan (${winningTeam}) mara ke pusingan seterusnya!`))
+                .then(() => alert(`Pemenang (${winningTeam}) mara ke pusingan seterusnya!`))
                 .catch(err => alert("Ralat: " + err.message));
         }
 
@@ -992,29 +712,27 @@
             rounds.forEach(r => {
                 const roundBox = document.createElement('div');
                 roundBox.className = "space-y-2 border-t border-gray-800 pt-3";
-                roundBox.innerHTML = `<h5 class="text-xs font-bold text-cyan-400 uppercase tracking-wider">${r.title}</h5>`;
+                roundBox.innerHTML = `<h5 class="text-xs font-bold text-cyan-400 uppercase">${r.title}</h5>`;
 
-                const matchesList = state.bracket[r.key] || [];
-                matchesList.forEach((m, idx) => {
+                (state.bracket[r.key] || []).forEach((m, idx) => {
                     const item = document.createElement('div');
                     item.className = "p-3 bg-[#050811] rounded-xl border border-cyan-500/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs";
                     item.innerHTML = `
-                        <div class="space-y-1">
+                        <div>
                             <span class="text-gray-400 font-mono">Perlawanan #${idx + 1}</span>
                             <div class="font-bold text-white">${m.team1 || 'TBD'} vs ${m.team2 || 'TBD'}</div>
-                            ${m.winner ? `<span class="text-emerald-400 text-[10px] font-extrabold">Pemenang: ${m.winner}</span>` : ''}
+                            ${m.winner ? `<span class="text-emerald-400 font-extrabold text-[10px]">Pemenang: ${m.winner}</span>` : ''}
                         </div>
                         <div class="flex items-center gap-2">
                             <input type="number" id="sc1-${r.key}-${idx}" value="${m.score1 ?? 0}" class="w-12 bg-[#0B1021] border border-cyan-500/40 rounded px-2 py-1 text-center text-white">
                             <span>-</span>
                             <input type="number" id="sc2-${r.key}-${idx}" value="${m.score2 ?? 0}" class="w-12 bg-[#0B1021] border border-cyan-500/40 rounded px-2 py-1 text-center text-white">
-                            <button onclick="triggerWin('${r.key}', ${idx}, '${m.team1}')" ${(!m.team1 || m.team1 === 'TBD') ? 'disabled' : ''} class="px-2.5 py-1 bg-[#06B6D4] text-black font-extrabold rounded hover:bg-cyan-400 disabled:opacity-40">Menang T1</button>
-                            <button onclick="triggerWin('${r.key}', ${idx}, '${m.team2}')" ${(!m.team2 || m.team2 === 'TBD') ? 'disabled' : ''} class="px-2.5 py-1 bg-[#F59E0B] text-black font-extrabold rounded hover:bg-yellow-400 disabled:opacity-40">Menang T2</button>
+                            <button onclick="triggerWin('${r.key}', ${idx}, '${m.team1}')" ${(!m.team1 || m.team1 === 'TBD') ? 'disabled' : ''} class="px-2.5 py-1 bg-[#06B6D4] text-black font-extrabold rounded disabled:opacity-40">Menang T1</button>
+                            <button onclick="triggerWin('${r.key}', ${idx}, '${m.team2}')" ${(!m.team2 || m.team2 === 'TBD') ? 'disabled' : ''} class="px-2.5 py-1 bg-[#F59E0B] text-black font-extrabold rounded disabled:opacity-40">Menang T2</button>
                         </div>
                     `;
                     roundBox.appendChild(item);
                 });
-
                 container.appendChild(roundBox);
             });
         }
@@ -1026,8 +744,7 @@
         }
 
         function loginAdmin() {
-            const pass = document.getElementById('admin-pass-input').value;
-            if (pass === 'amihandsome') {
+            if (document.getElementById('admin-pass-input').value === 'amihandsome') {
                 state.isAdminLoggedIn = true;
                 document.getElementById('admin-login-card').classList.add('hidden');
                 document.getElementById('admin-dashboard').classList.remove('hidden');
@@ -1058,17 +775,11 @@
                     <td class="px-6 py-4 text-xs">${t.category}</td>
                     <td class="px-6 py-4 text-xs font-mono">${t.contact}</td>
                     <td class="px-6 py-4">
-                        <span class="px-2 py-1 rounded text-[10px] font-bold ${t.status === 'LULUS' ? 'bg-green-950 text-green-300' : 'bg-yellow-950 text-yellow-300'}">
-                            ${t.status}
-                        </span>
+                        <span class="px-2 py-1 rounded text-[10px] font-bold ${t.status === 'LULUS' ? 'bg-green-950 text-green-300' : 'bg-yellow-950 text-yellow-300'}">${t.status}</span>
                     </td>
                     <td class="px-6 py-4 text-right space-x-2">
-                        <button type="button" onclick="toggleApprove('${t.id}')" class="px-2 py-1 bg-green-950 text-green-400 hover:bg-green-900 border border-green-800 rounded text-xs font-bold">
-                            ${t.status === 'LULUS' ? 'Batal' : 'Lulus'}
-                        </button>
-                        <button type="button" onclick="deleteTeam('${t.id}')" class="px-2 py-1 bg-red-950 text-red-400 hover:bg-red-900 border border-red-800 rounded text-xs font-bold">
-                            Padam
-                        </button>
+                        <button type="button" onclick="toggleApprove('${t.id}')" class="px-2 py-1 bg-green-950 text-green-400 border border-green-800 rounded text-xs font-bold">${t.status === 'LULUS' ? 'Batal' : 'Lulus'}</button>
+                        <button type="button" onclick="deleteTeam('${t.id}')" class="px-2 py-1 bg-red-950 text-red-400 border border-red-800 rounded text-xs font-bold">Padam</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -1078,51 +789,18 @@
         function toggleApprove(id) {
             const team = state.teams.find(t => t.id === id);
             if (team) {
-                const newStatus = team.status === 'LULUS' ? 'MENUNGGU' : 'LULUS';
-                db.ref('teams/' + id).update({ status: newStatus })
-                    .then(() => console.log("Status updated successfully."))
-                    .catch((err) => alert("Ralat mengemas kini status: " + err.message));
+                db.ref('teams/' + id).update({ status: team.status === 'LULUS' ? 'MENUNGGU' : 'LULUS' });
             }
         }
 
         function deleteTeam(id) {
-            if (confirm('Padam skuad ini?')) {
-                db.ref('teams/' + id).remove()
-                    .then(() => console.log("Team removed successfully."))
-                    .catch((err) => alert("Ralat memadam skuad: " + err.message));
-            }
-        }
-
-        function exportTeamsCSV() {
-            if (state.teams.length === 0) return alert('Tiada data.');
-            let csv = "data:text/csv;charset=utf-8,No,Nama Skuad,Kategori,WhatsApp\n";
-            state.teams.forEach((t, i) => { csv += `${i+1},"${t.name}","${t.category}","${t.contact}"\n`; });
-            const link = document.createElement("a");
-            link.setAttribute("href", encodeURI(csv));
-            link.setAttribute("download", `STAG_MLBB_${Date.now()}.csv`);
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function updateStatsCounters() {
-            const el = document.getElementById('stat-hero-teams');
-            if (el) el.innerText = `${state.teams.length} / 32 TEAMS`;
+            if (confirm('Padam skuad ini?')) db.ref('teams/' + id).remove();
         }
 
         function startCountdown() {
             function update() {
-                const now = new Date().getTime();
-                const target = new Date(state.targetDate).getTime();
-                const diff = target - now;
-                if (diff <= 0) {
-                    document.getElementById('cd-days').innerText = '00';
-                    document.getElementById('cd-hours').innerText = '00';
-                    document.getElementById('cd-minutes').innerText = '00';
-                    document.getElementById('cd-seconds').innerText = '00';
-                    return;
-                }
-
+                const diff = new Date(state.targetDate).getTime() - new Date().getTime();
+                if (diff <= 0) return;
                 document.getElementById('cd-days').innerText = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
                 document.getElementById('cd-hours').innerText = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
                 document.getElementById('cd-minutes').innerText = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
