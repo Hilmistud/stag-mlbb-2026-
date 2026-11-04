@@ -639,7 +639,7 @@
         function closeRosterModal() { document.getElementById('roster-modal').classList.add('hidden'); }
 
         function createInitial32Bracket() {
-            const r32 = []; for (let i = 1; i <= 16; i++) r32.push({ id: `r32_${i}`, team1: `Skuad ${i*2 - 1}`, score1: 0, team2: `Skuad ${i*2}`, score2: 0, winner: null });
+            const r32 = []; for (let i = 1; i <= 16; i++) r32.push({ id: `r32_${i}`, team1: `TBD`, score1: 0, team2: `TBD`, score2: 0, winner: null });
             const r16 = []; for (let i = 1; i <= 8; i++) r16.push({ id: `r16_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
             const qf = []; for (let i = 1; i <= 4; i++) qf.push({ id: `qf_${i}`, team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null });
             const sf = [{ id: 'sf_1', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }, { id: 'sf_2', team1: 'TBD', score1: 0, team2: 'TBD', score2: 0, winner: null }];
@@ -700,15 +700,20 @@
             return card;
         }
 
+        // AUTO BRACKET HANYA UNTUK PASUKAN BERSTATUS LULUS
         function generateRandomBracket() {
             const approvedTeams = state.teams.filter(t => t.status === 'LULUS');
-            const teamList = (approvedTeams.length >= 2 ? approvedTeams : state.teams).map(t => t.name);
+            const approvedNames = approvedTeams.map(t => t.name);
 
-            if (teamList.length < 2) return alert('Sekurang-kurangnya 2 skuad diperlukan!');
+            if (approvedNames.length < 2) {
+                return alert('Ralat: Sekurang-kurangnya 2 pasukan berstatus "LULUS" diperlukan! Pasukan berstatus "MENUNGGU" tidak dibenarkan masuk ke dalam carta perlawanan.');
+            }
 
-            const shuffled = [...teamList].sort(() => 0.5 - Math.random());
+            const shuffled = [...approvedNames].sort(() => 0.5 - Math.random());
             const slots = Array(32).fill('TBD');
-            for (let i = 0; i < shuffled.length && i < 32; i++) slots[i] = shuffled[i];
+            for (let i = 0; i < shuffled.length && i < 32; i++) {
+                slots[i] = shuffled[i];
+            }
 
             const newBracket = createInitial32Bracket();
             for (let i = 0; i < 16; i++) {
@@ -716,7 +721,9 @@
                 newBracket.r32[i].team2 = slots[i * 2 + 1];
             }
 
-            db.ref('bracket').set(newBracket, () => alert('Carta Pertandingan Split 32 Slot telah disegerakkan!'));
+            db.ref('bracket').set(newBracket, () => {
+                alert(`Carta Pertandingan berjaya dihasilkan untuk ${approvedNames.length} pasukan berstatus LULUS!`);
+            });
         }
 
         function setMatchWinner(roundKey, matchIndex, winningTeam, score1, score2) {
