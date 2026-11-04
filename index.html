@@ -286,7 +286,7 @@
             </div>
         </div>
 
-        <!-- 5. SPLIT CENTER BRACKET TREE (LEFT vs RIGHT) -->
+        <!-- 5. SPLIT CENTER BRACKET TREE -->
         <div id="tab-brackets" class="tab-content hidden max-w-7xl mx-auto px-4 py-8 space-y-6">
             <div class="text-center mb-4">
                 <h2 class="text-2xl font-black text-white glow-title">CARTA KEJOHANAN (SPLIT TREE)</h2>
@@ -298,29 +298,24 @@
                 <h3 id="champion-team-name" class="text-2xl font-black text-yellow-400 mt-1">-</h3>
             </div>
 
-            <!-- 7-Column Split Bracket Container -->
             <div class="overflow-x-auto pb-6">
                 <div class="min-w-[1250px] grid grid-cols-7 gap-3 items-center">
                     
-                    <!-- Col 1: Left R32 (Matches 1-8) -->
                     <div class="space-y-2">
                         <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R32 (Kiri)</div>
                         <div id="bracket-left-r32" class="space-y-2"></div>
                     </div>
 
-                    <!-- Col 2: Left R16 (Matches 1-4) -->
                     <div class="space-y-4 pt-3">
                         <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R16</div>
                         <div id="bracket-left-r16" class="space-y-6"></div>
                     </div>
 
-                    <!-- Col 3: Left QF (Matches 1-2) -->
                     <div class="space-y-8 pt-6">
                         <div class="text-[10px] font-bold text-cyan-400 text-center uppercase">Suku Akhir</div>
                         <div id="bracket-left-qf" class="space-y-14"></div>
                     </div>
 
-                    <!-- Col 4: CENTER FINALS (Left SF vs Right SF) -->
                     <div class="space-y-6 text-center">
                         <div>
                             <div class="text-[10px] font-bold text-cyan-400 mb-1 uppercase">Semi-Final 1</div>
@@ -338,19 +333,16 @@
                         </div>
                     </div>
 
-                    <!-- Col 5: Right QF (Matches 3-4) -->
                     <div class="space-y-8 pt-6">
                         <div class="text-[10px] font-bold text-cyan-400 text-center uppercase">Suku Akhir</div>
                         <div id="bracket-right-qf" class="space-y-14"></div>
                     </div>
 
-                    <!-- Col 6: Right R16 (Matches 5-8) -->
                     <div class="space-y-4 pt-3">
                         <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R16</div>
                         <div id="bracket-right-r16" class="space-y-6"></div>
                     </div>
 
-                    <!-- Col 7: Right R32 (Matches 9-16) -->
                     <div class="space-y-2">
                         <div class="text-[10px] font-bold text-gray-400 text-center uppercase">R32 (Kanan)</div>
                         <div id="bracket-right-r32" class="space-y-2"></div>
@@ -405,36 +397,41 @@
 
     </main>
 
-    <!-- PAYMENT QR POPUP MODAL -->
+    <!-- PAYMENT QR POPUP MODAL WITH WHATSAPP LINK -->
     <div id="payment-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="rgb-breathing-box bg-[#0B1021] rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-2">
             <div>
                 <span class="inline-block px-3 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/40 rounded-full text-[10px] font-extrabold uppercase mb-2">
                     Langkah Terakhir Pendaftaran
                 </span>
-                <h3 class="text-xl font-black text-white uppercase">Pembayaran Yuran Yuran Pasukan</h3>
+                <h3 class="text-xl font-black text-white uppercase">Pembayaran Yuran Pasukan</h3>
                 <p class="text-xs text-gray-400 mt-1">Sila imbas Kod QR di bawah untuk membuat pembayaran yuran pendaftaran.</p>
             </div>
 
-            <!-- Image Container -->
+            <!-- Image Display -->
             <div class="bg-white p-3 rounded-2xl inline-block max-w-[240px] mx-auto shadow-lg border border-cyan-500/30">
                 <img id="qr-image-display" src="qr.jpeg" alt="Maybank QR Code" class="w-full h-auto rounded-lg object-contain">
             </div>
 
-            <!-- Download Button -->
-            <div>
-                <a href="qr.jpeg" download="STAG_MLBB_Maybank_QR.jpeg" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-500/50 text-xs font-bold hover:bg-cyan-900 transition">
-                    <i data-lucide="download" class="w-4 h-4"></i> Muat Turun Kod QR
+            <!-- Action Buttons: Download QR & Direct WhatsApp -->
+            <div class="flex flex-col sm:flex-row gap-2 justify-center">
+                <a href="qr.jpeg" download="STAG_MLBB_Maybank_QR.jpeg" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-500/50 text-xs font-bold hover:bg-cyan-900 transition">
+                    <i data-lucide="download" class="w-4 h-4"></i> Muat Turun QR
+                </a>
+
+                <!-- Hyperlink to Ustaz Haziq WhatsApp -->
+                <a id="btn-whatsapp-haziq" href="https://wa.me/60173987686?text=Assalamualaikum%20Ustaz%20Haziq,%20saya%20ingin%20mengesahkan%20pembayaran%20yuran%20pendaftaran%20untuk%20Pasukan:%20" target="_blank" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-950 text-emerald-400 border border-emerald-500/50 text-xs font-bold hover:bg-emerald-900 transition">
+                    <i data-lucide="message-square" class="w-4 h-4"></i> Send ke WhatsApp (Ustaz Haziq)
                 </a>
             </div>
 
             <!-- Formal Instruction Message -->
             <div class="p-3.5 rounded-xl bg-[#050811] border border-cyan-500/30 text-left text-xs space-y-2">
                 <p class="text-gray-300 leading-relaxed">
-                    Sila simpan atau muat turun bukti pembayaran (resit / tangkapan skrin) dan hantarkan kepada <strong class="text-white">Pegawai Bertanggungjawab (Person in-Charge)</strong> melalui WhatsApp untuk proses pengesahan <strong class="text-yellow-400">No WhatsApp(Ustaz Haziq):017-3987686</strong>. Sila nyatakan juga <strong class="text-yellow-400">Nama Pasukan</strong> anda.
+                    Sila simpan atau muat turun bukti pembayaran (resit / tangkapan skrin) dan hantarkan kepada <strong class="text-white">Pegawai Bertanggungjawab (Ustaz Haziq)</strong> melalui WhatsApp untuk proses pengesahan. Sila nyatakan juga <strong class="text-yellow-400">Nama Pasukan</strong> anda.
                 </p>
                 <div class="p-2.5 rounded-lg bg-red-950/40 border border-red-500/40 text-[11px] text-red-300">
-                    <strong>Nota Penting:</strong> Pasukan anda tidak akan dimasukkan ke dalam carta perlawanan sekiranya bukti pembayaran tidak dihantar melalui WhatsApp <strong class="text-yellow-400">No WhatsApp(Ustaz Haziq):017-3987686</strong>.
+                    <strong>Nota Penting:</strong> Sekiranya resit tidak dihantar melalui WhatsApp, pasukan anda <strong class="underline">tidak akan dimasukkan</strong> ke dalam carta perlawanan.
                 </div>
             </div>
 
@@ -574,13 +571,18 @@
                 db.ref('teams/' + teamId).set({ id: teamId, name, category, contact, status: 'MENUNGGU', timestamp: new Date().toISOString(), players })
                     .then(() => { 
                         regForm.reset(); 
-                        openPaymentModal(); 
+                        openPaymentModal(name); 
                     })
                     .catch((err) => alert('Ralat: ' + err.message));
             });
         }
 
-        function openPaymentModal() {
+        function openPaymentModal(teamName) {
+            const waBtn = document.getElementById('btn-whatsapp-haziq');
+            if (waBtn && teamName) {
+                const encodedMsg = encodeURIComponent(`Assalamualaikum Ustaz Haziq, saya ingin mengesahkan pembayaran yuran pendaftaran untuk Pasukan: ${teamName}`);
+                waBtn.href = `https://wa.me/60173987686?text=${encodedMsg}`;
+            }
             document.getElementById('payment-modal').classList.remove('hidden');
         }
 
