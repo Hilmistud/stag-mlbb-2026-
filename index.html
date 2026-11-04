@@ -405,6 +405,46 @@
 
     </main>
 
+    <!-- PAYMENT QR POPUP MODAL -->
+    <div id="payment-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+        <div class="rgb-breathing-box bg-[#0B1021] rounded-3xl max-w-md w-full p-6 text-center space-y-4 border-2">
+            <div>
+                <span class="inline-block px-3 py-1 bg-yellow-500/10 text-yellow-400 border border-yellow-500/40 rounded-full text-[10px] font-extrabold uppercase mb-2">
+                    Langkah Terakhir Pendaftaran
+                </span>
+                <h3 class="text-xl font-black text-white uppercase">Pembayaran Yuran Yuran Pasukan</h3>
+                <p class="text-xs text-gray-400 mt-1">Sila imbas Kod QR di bawah untuk membuat pembayaran yuran pendaftaran.</p>
+            </div>
+
+            <!-- Image Container -->
+            <div class="bg-white p-3 rounded-2xl inline-block max-w-[240px] mx-auto shadow-lg border border-cyan-500/30">
+                <img id="qr-image-display" src="qr.jpeg" alt="Maybank QR Code" class="w-full h-auto rounded-lg object-contain">
+            </div>
+
+            <!-- Download Button -->
+            <div>
+                <a href="qr.jpeg" download="STAG_MLBB_Maybank_QR.jpeg" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-950 text-cyan-400 border border-cyan-500/50 text-xs font-bold hover:bg-cyan-900 transition">
+                    <i data-lucide="download" class="w-4 h-4"></i> Muat Turun Kod QR
+                </a>
+            </div>
+
+            <!-- Formal Instruction Message -->
+            <div class="p-3.5 rounded-xl bg-[#050811] border border-cyan-500/30 text-left text-xs space-y-2">
+                <p class="text-gray-300 leading-relaxed">
+                    Sila simpan atau muat turun bukti pembayaran (resit / tangkapan skrin) dan hantarkan kepada <strong class="text-white">Pegawai Bertanggungjawab (Person in-Charge)</strong> melalui WhatsApp untuk proses pengesahan. Sila nyatakan juga <strong class="text-yellow-400">Nama Pasukan</strong> anda.
+                </p>
+                <div class="p-2.5 rounded-lg bg-red-950/40 border border-red-500/40 text-[11px] text-red-300">
+                    <strong>Nota Penting:</strong> Pasukan anda tidak akan dimasukkan ke dalam carta perlawanan sekiranya bukti pembayaran tidak dihantar melalui WhatsApp.
+                </div>
+            </div>
+
+            <!-- OK / Close Button -->
+            <button onclick="closePaymentModal()" class="btn-neon-gold w-full py-3 text-black font-extrabold rounded-xl text-sm uppercase tracking-wider">
+                OK, Saya Faham
+            </button>
+        </div>
+    </div>
+
     <!-- ROSTER DETAIL MODAL -->
     <div id="roster-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
         <div class="rgb-breathing-box bg-[#0B1021] rounded-3xl max-w-md w-full p-6 space-y-4 border-2">
@@ -532,9 +572,21 @@
 
                 const teamId = 'team_' + Date.now();
                 db.ref('teams/' + teamId).set({ id: teamId, name, category, contact, status: 'MENUNGGU', timestamp: new Date().toISOString(), players })
-                    .then(() => { alert(`Skuad ${name} Berjaya Didaftarkan!`); regForm.reset(); switchTab('teams'); })
+                    .then(() => { 
+                        regForm.reset(); 
+                        openPaymentModal(); 
+                    })
                     .catch((err) => alert('Ralat: ' + err.message));
             });
+        }
+
+        function openPaymentModal() {
+            document.getElementById('payment-modal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('payment-modal').classList.add('hidden');
+            switchTab('teams');
         }
 
         function renderRegisteredTeams() {
@@ -593,7 +645,6 @@
             return { r32, r16, qf, sf, final };
         }
 
-        // RENDER SPLIT LEFT-RIGHT BRACKET
         function renderSplitBracket() {
             if (!state.bracket || !state.bracket.r32) state.bracket = createInitial32Bracket();
             const b = state.bracket;
@@ -605,17 +656,14 @@
                 matches.forEach(m => c.appendChild(createMiniCard(m)));
             };
 
-            // Left Wing
             renderCol('bracket-left-r32', b.r32.slice(0, 8));
             renderCol('bracket-left-r16', b.r16.slice(0, 4));
             renderCol('bracket-left-qf', b.qf.slice(0, 2));
 
-            // Right Wing
             renderCol('bracket-right-r32', b.r32.slice(8, 16));
             renderCol('bracket-right-r16', b.r16.slice(4, 8));
             renderCol('bracket-right-qf', b.qf.slice(2, 4));
 
-            // Center Finals
             const sfLeft = document.getElementById('bracket-sf-left');
             const sfRight = document.getElementById('bracket-sf-right');
             const finalMatch = document.getElementById('bracket-final-match');
